@@ -1,5 +1,5 @@
 # Global-Glimpse-News-Website <br>
 
 This is my First Git Repository <br>
-Author-Uday
+Author-Uday <br>
 Final Year Project
