@@ -1,3 +1,3 @@
-# Global-Glimpse-News-Website
-This is my First Git Repository
+# Global-Glimpse-News-Website <br>
+This is my First Git Repository <br>
 Author-Uday
