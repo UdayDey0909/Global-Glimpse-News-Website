@@ -68,11 +68,27 @@ nav {
   cursor: pointer;
   padding: 1rem;
   margin: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.767);
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+/*.blog-card {
+  width: 280px;
+  border: 1px solid #2d4c50;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 1rem;
+  margin: 10px;
 }
 
 .blog-card:hover {
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
-}
+}*/
 
 .blog-card img {
   width: 100%;
