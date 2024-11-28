@@ -1,0 +1,27 @@
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body.dark-mode nav {
+  background-color: #1e272e;
+  box-shadow: 0 7px 10px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .navbar .logo {
+  color: #e1e1e1;
+}
+
+body.dark-mode .blog-card {
+  background-color: #1e272e;
+  border-color: #333;
+}
+
+body.dark-mode .blog-card:hover {
+  box-shadow: 0px 6px 8px rgb(82, 81, 81);
+}
+
+/* body.dark-mode .blog-card h2,
+body.dark-mode .blog-card p {
+  color: #e1e1e1;
+} */
