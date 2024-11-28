@@ -1,12 +1,30 @@
 const apikey = "21e2a4f51691472e9628bcca6cb4b22b";
 
 const blogContainer = document.getElementById("blog-container");
-const searchField = document.getElementById("search-input");
+const searchField = document.getElementById("search-field");
 const searchButton = document.getElementById("search-button");
+
+document.addEventListener("DOMContentLoaded", () => {
+  const body = document.querySelector("body");
+  const nav = document.querySelector("nav");
+  const modeToggle = document.querySelector(".dark-light");
+  const searchToggle = document.querySelector(".searchToggle");
+
+  modeToggle.addEventListener("click", () => {
+    modeToggle.classList.toggle("active");
+    body.classList.toggle("dark-mode");
+  });
+
+  searchToggle.addEventListener("click", () => {
+    searchToggle.classList.toggle("active");
+  });
+});
+
+//? Random News Blogs from data in india
 
 async function fetchRandomNews() {
   try {
-    const apiUrl = `https://newsapi.org/v2/top-headlines?country=us&pageSize=16&apikey=${apikey}`;
+    const apiUrl = `https://newsapi.org/v2/everything?q=india&from=26-11-2024&pageSize=10&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
@@ -15,6 +33,17 @@ async function fetchRandomNews() {
     return [];
   }
 }
+
+(async () => {
+  try {
+    const articles = await fetchRandomNews();
+    displayBlogs(articles);
+  } catch (error) {
+    console.error("Error fetching random news:", error);
+  }
+})();
+
+//? Search News Query
 
 searchButton.addEventListener("click", async () => {
   const query = searchField.value.trim();
@@ -40,26 +69,36 @@ async function fetchNewsQuery(query) {
   }
 }
 
+//?Blog Card
+
 function displayBlogs(articles) {
   blogContainer.innerHTML = "";
+
   articles.forEach((article) => {
     const blogCard = document.createElement("div");
     blogCard.classList.add("blog-card");
+
     const img = document.createElement("img");
     img.src = article.urlToImage;
-    img.alt = article.title;
+    if (img.src === "http://127.0.0.1:5500/null") {
+      return;
+    }
+
     const title = document.createElement("h2");
-    const truncatedTitle =
-      article.title.length > 30
-        ? article.title.slice(0, 30) + "..."
-        : article.title;
-    title.textContent = truncatedTitle;
+    if (article.title === "[Removed]") {
+      return;
+    }
+
+    title.textContent = article.title || "Error 404";
+    if (title.textContent === "Error 404") {
+      return;
+    }
+
     const description = document.createElement("p");
-    const truncatedDes =
-      article.description.length > 120
-        ? article.description.slice(0, 120) + "..."
-        : article.description;
-    description.textContent = truncatedDes;
+    description.textContent = article.description || "Article not found.";
+    if (description.textContent === "Article not found.") {
+      return;
+    }
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
@@ -70,12 +109,3 @@ function displayBlogs(articles) {
     blogContainer.appendChild(blogCard);
   });
 }
-
-(async () => {
-  try {
-    const articles = await fetchRandomNews();
-    displayBlogs(articles);
-  } catch (error) {
-    console.error("Error fetching random news:", error);
-  }
-})();

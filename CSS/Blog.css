@@ -1,0 +1,59 @@
+/** Google Font Import - Poppins & Roboto */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@300;400&display=swap");
+
+/*? Blog Section */
+
+#blog-container {
+  padding: 3.5rem 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.blog-card {
+  width: 500px;
+  border: 1px solid #2d4c50;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 1rem;
+  margin: 10px;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blog-card:hover {
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.767);
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+.blog-card img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+/*? Truncation */
+
+.blog-card h2 {
+  font-size: 1.7rem;
+  margin-bottom: 0.7rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.blog-card p {
+  font-size: 1.2rem;
+  font-family: "Roboto", sans-serif;
+  padding-top: 0.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  line-clamp: 3; /* Standard property for compatibility */
+  -webkit-box-orient: vertical;
+}
