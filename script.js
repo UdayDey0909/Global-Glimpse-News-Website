@@ -1,8 +1,24 @@
 const apikey = "21e2a4f51691472e9628bcca6cb4b22b";
 
 const blogContainer = document.getElementById("blog-container");
-const searchField = document.getElementById("search-input");
+const searchField = document.getElementById("search-field");
 const searchButton = document.getElementById("search-button");
+
+document.addEventListener("DOMContentLoaded", () => {
+  const body = document.querySelector("body");
+  const nav = document.querySelector("nav");
+  const modeToggle = document.querySelector(".dark-light");
+  const searchToggle = document.querySelector(".searchToggle");
+
+  modeToggle.addEventListener("click", () => {
+    modeToggle.classList.toggle("active");
+    body.classList.toggle("dark-mode");
+  });
+
+  searchToggle.addEventListener("click", () => {
+    searchToggle.classList.toggle("active");
+  });
+});
 
 //? Random News Blogs from data in india
 

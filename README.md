@@ -27,5 +27,16 @@ A responsive News platform that dynamically fetches and displays articles from a
 To run this project, you'll need:
 
 1. A basic understanding of HTML, CSS, and JavaScript.
-2. [Node.js].
+2. [Node.js](https://nodejs.org/) installed.
 3. An API key from [NewsAPI](https://newsapi.org/) or another similar source.
+
+---
+
+## Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/neuzy-blog.git
+cd neuzy-blog
+```

@@ -11,19 +11,40 @@
     <link rel="stylesheet" href="CSS/style.css" />
     <link rel="stylesheet" href="CSS/nav.css" />
     <link rel="stylesheet" href="CSS/blog.css" />
+    <link rel="stylesheet" href="CSS/dark-mode.css" />
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
     <nav>
       <div class="navbar obj-width">
         <a class="logo" href="#">Global Glimpse</a>
-        <div class="search-container">
-          <input
-            type="text"
-            placeholder="Search News here..."
-            id="search-input"
-          />
-          <button id="search-button">Search</button>
+
+        <div class="darkLight-searchBox">
+          <div class="dark-light">
+            <i class="bx bx-moon moon"></i>
+            <i class="bx bx-sun sun"></i>
+          </div>
+
+          <div class="searchBox">
+            <div class="searchToggle">
+              <i class="bx bx-x cancel"></i>
+              <i class="bx bx-search search"></i>
+            </div>
+
+            <div class="search-field">
+              <input
+                type="text"
+                id="search-field"
+                placeholder="Search News Here..."
+              />
+              <i class="bx bx-search" id="search-button"></i>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
