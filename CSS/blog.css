@@ -11,6 +11,22 @@
   flex-wrap: wrap;
 }
 
+#top-news {
+  padding: 3.5rem 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+#local-news {
+  padding: 3.5rem 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
 .blog-card {
   width: 500px;
   border: 1px solid #2d4c50;

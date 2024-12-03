@@ -37,6 +37,5 @@ To run this project, you'll need:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/neuzy-blog.git
-cd neuzy-blog
+git clone https://github.com/UdayDey0909/Global-Glimpse-News-Website.git
 ```
