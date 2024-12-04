@@ -124,7 +124,7 @@ function displayLocalNews(articles) {
 
 async function fetchRandomNews() {
   try {
-    const apiUrl = `https://newsapi.org/v2/everything?q=india&searchIn=title&pageSize=10&apikey=${apikey}`;
+    const apiUrl = `https://newsapi.org/v2/everything?q=india&searchIn=title&pageSize=5&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
@@ -210,7 +210,7 @@ function displayBlogs(articles) {
   });
 }
 
-// Dark Mode Toggle
+//? Dark Mode Toggle
 document.addEventListener("DOMContentLoaded", () => {
   const body = document.querySelector("body");
   const nav = document.querySelector("nav");
