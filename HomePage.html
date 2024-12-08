@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="CSS/style.css" />
     <link rel="stylesheet" href="CSS/nav.css" />
     <link rel="stylesheet" href="CSS/blog.css" />
-    <link rel="stylesheet" href="CSS/dark-mode.css" />
+    <!--     <link rel="stylesheet" href="CSS/dark-mode.css" /> -->
 
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
@@ -21,8 +21,25 @@
 
   <body>
     <nav>
-      <div class="navbar obj-width">
-        <a class="logo" href="#">Global Glimpse</a>
+      <div class="navbar">
+        <i class="bx bx-menu sidebarOpen"></i>
+        <span class="logo navLogo"><a href="#">Global Glimpse</a></span>
+
+        <div class="category-nav">
+          <div class="logo-toggle">
+            <span class="logo categoryLogo"><a href="#">GlobalGlimpse</a></span>
+            <i class="bx bx-x sidebarClose"></i>
+          </div>
+
+          <ul class="nav-links">
+            <li><a href="#" data-category="business">Business</a></li>
+            <li><a href="#" data-category="entertainment">Entertainment</a></li>
+            <li><a href="#" data-category="technology">Technology</a></li>
+            <li><a href="#" data-category="health">Health</a></li>
+            <li><a href="#" data-category="sports">Sports</a></li>
+            <li><a href="#" data-category="science">Science</a></li>
+          </ul>
+        </div>
 
         <div class="darkLight-searchBox">
           <div class="dark-light">
@@ -48,6 +65,12 @@
         </div>
       </div>
     </nav>
+
+    <header></header>
+
+    <section id="">
+      <article id="search-result"></article>
+    </section>
 
     <main class="obj-width">
       <section id="">

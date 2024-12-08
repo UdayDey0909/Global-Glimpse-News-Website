@@ -1,38 +1,100 @@
-/** Google Font Import - Poppins */
+/**======= Google Font Import - Poppins & Roboto =======**/
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@300;400&display=swap");
 
-/*? css reset */
+/**======= Colors =======**/
+:root {
+  --body-color: #edf6f9;
+  --nav-color: #2d4c50;
+  --text-color: #fff;
+  --blog-text-color: #000;
+  --side-nav: #010718;
+  --search-text: #010718;
+  --search-bar: #f2f2f2;
+}
+
+body.dark-mode {
+  --body-color: #121212;
+  --nav-color: #1e272e;
+  --text-color: #ccc;
+  --blog-text-color: #ccc;
+  --side-nav: #242526;
+  --search-text: #fff;
+  --search-bar: #121212;
+}
+
+/**======= Global reset =======**/
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-/*? Colors */
-:root {
-  --background-color: #edf6f9;
-  --nav-color: #2d4c50;
-  --text-color: #212529;
-}
-
-body {
-  background-color: var(--background-color);
-  height: 100vh;
   font-family: "Poppins", sans-serif;
 }
 
-/*? Global css  */
+/**======= Base Style =======**/
+
+body {
+  height: 100vh;
+  background: var(--body-color);
+  color: var(--blog-text-color);
+}
 
 .obj-width {
   max-width: 1600px;
   margin: auto;
 }
 
-/*? Mobile Version */
+/**======= Mobile Version =======**/
 
-@media (max-width: 768px) {
-  .navbar .logo {
-    font-size: 2rem;
+@media (max-width: 1090px) {
+  nav .navbar .sidebarOpen {
+    display: block !important;
+  }
+
+  .category-nav {
+    position: fixed;
+    height: 100%;
+    width: 320px;
+    left: -100%;
+    top: 0;
+    padding: 20px;
+    background-color: var(--side-nav);
+    z-index: 100;
+    transition: all 0.4s ease;
+  }
+
+  nav.active .category-nav {
+    left: 0;
+  }
+
+  nav.active .navbar .navLogo a {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .category-nav .logo-toggle {
+    display: block;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo-toggle .sidebarClose {
+    color: var(--text-color);
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .navbar .nav-links {
+    flex-direction: column;
+    padding-top: 30px;
+  }
+
+  .nav-links li a {
+    display: block;
+    margin-top: 30px;
   }
 
   .search-container {

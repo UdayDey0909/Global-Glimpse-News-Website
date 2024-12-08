@@ -1,10 +1,58 @@
 const apikey = "21e2a4f51691472e9628bcca6cb4b22b";
 
+const newsQuery = document.getElementById("search-result");
 const topNews = document.getElementById("top-news");
 const localNews = document.getElementById("local-news");
 const blogContainer = document.getElementById("blog-container");
 const searchField = document.getElementById("search-field");
 const searchButton = document.getElementById("search-button");
+
+const categoryNav = document.querySelector(".category-nav");
+const main = document.querySelector("main");
+const body = document.querySelector("body");
+const nav = document.querySelector("nav");
+const modeToggle = document.querySelector(".dark-light");
+const searchToggle = document.querySelector(".searchToggle");
+const sidebarOpen = document.querySelector(".sidebarOpen");
+const sidebarClose = document.querySelector(".sidebarClose");
+
+//?======= Category News =======?//
+
+async function fetchCategoryNews(category) {
+  try {
+    const apiUrl = `https://newsapi.org/v2/everything?q=${category}&pageSize=16&apikey=${apikey}`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    return data.articles;
+  } catch (error) {
+    console.error("Error fetching category news", error);
+    return [];
+  }
+}
+
+function highlightActiveCategory(target) {
+  // Remove the 'active' class from all category links
+  document.querySelectorAll(".category-nav a").forEach((link) => {
+    link.classList.remove("active");
+  });
+
+  // Add the 'active' class to the clicked category link
+  target.classList.add("active");
+}
+
+categoryNav.addEventListener("click", async (event) => {
+  const target = event.target.closest("a");
+  if (target && target.dataset.category) {
+    const category = target.dataset.category;
+    highlightActiveCategory(target);
+    try {
+      const articles = await fetchCategoryNews(category);
+      displayBlogs(articles);
+    } catch (error) {
+      console.error("Error fetching category news:", error);
+    }
+  }
+});
 
 //?======= Top News =======?//
 
@@ -87,7 +135,7 @@ async function fetchLocalNews() {
 })();
 
 function displayLocalNews(articles) {
-  topNews.innerHTML = "";
+  localNews.innerHTML = "";
 
   articles.forEach((article) => {
     const blogCard = document.createElement("div");
@@ -120,7 +168,7 @@ function displayLocalNews(articles) {
   });
 }
 
-//? Random News Blogs from data in india
+//?======= Random News in india =======?//
 
 async function fetchRandomNews() {
   try {
@@ -142,34 +190,6 @@ async function fetchRandomNews() {
     console.error("Error fetching random news:", error);
   }
 })();
-
-//? Search News Query
-
-searchButton.addEventListener("click", async () => {
-  const query = searchField.value.trim();
-  if (query !== "") {
-    try {
-      const articles = await fetchNewsQuery(query);
-      displayBlogs(articles);
-    } catch (error) {
-      console.log("Error fetching news by query", error);
-    }
-  }
-});
-
-async function fetchNewsQuery(query) {
-  try {
-    const apiUrl = `https://newsapi.org/v2/everything?q=${query}&pageSize=10&apikey=${apikey}`;
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    return data.articles;
-  } catch (error) {
-    console.error("Error fetching random news", error);
-    return [];
-  }
-}
-
-//?Blog Card
 
 function displayBlogs(articles) {
   blogContainer.innerHTML = "";
@@ -210,19 +230,101 @@ function displayBlogs(articles) {
   });
 }
 
-//? Dark Mode Toggle
-document.addEventListener("DOMContentLoaded", () => {
-  const body = document.querySelector("body");
-  const nav = document.querySelector("nav");
-  const modeToggle = document.querySelector(".dark-light");
-  const searchToggle = document.querySelector(".searchToggle");
+//?======= Search Query =======?//
 
-  modeToggle.addEventListener("click", () => {
-    modeToggle.classList.toggle("active");
-    body.classList.toggle("dark-mode");
-  });
+searchButton.addEventListener("click", async () => {
+  const query = searchField.value.trim();
+  if (query !== "") {
+    try {
+      const articles = await fetchNewsQuery(query);
+      displayNewsQuery(articles);
+    } catch (error) {
+      console.log("Error fetching news by query", error);
+    }
+  }
+});
 
-  searchToggle.addEventListener("click", () => {
-    searchToggle.classList.toggle("active");
+async function fetchNewsQuery(query) {
+  try {
+    const apiUrl = `https://newsapi.org/v2/everything?q=${query}&pageSize=10&apikey=${apikey}`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    return data.articles;
+  } catch (error) {
+    console.error("Error fetching random news", error);
+    return [];
+  }
+}
+
+function displayNewsQuery(articles) {
+  main.innerHTML = "";
+
+  articles.forEach((article) => {
+    const blogCard = document.createElement("div");
+    blogCard.classList.add("blog-card");
+
+    const img = document.createElement("img");
+    img.src = article.urlToImage;
+    if (img.src === "http://127.0.0.1:5500/null") {
+      return;
+    }
+
+    const title = document.createElement("h2");
+    title.textContent = article.title;
+    if (article.title === "[Removed]") {
+      return;
+    }
+
+    const description = document.createElement("p");
+    description.textContent = article.description || "Null";
+    if (description.textContent === "Null") {
+      return;
+    }
+    blogCard.appendChild(img);
+    blogCard.appendChild(title);
+    blogCard.appendChild(description);
+    blogCard.addEventListener("click", () => {
+      window.open(article.url, "_blank");
+    });
+    newsQuery.appendChild(blogCard);
   });
+}
+
+//?======= Dark Mode Toggle =======?//
+
+let getMode = localStorage.getItem("mode");
+if (getMode && getMode === "dark-mode") {
+  body.classList.add("dark-mode");
+}
+
+modeToggle.addEventListener("click", () => {
+  modeToggle.classList.toggle("active");
+  body.classList.toggle("dark-mode");
+
+  if (!body.classList.contains("dark-mode")) {
+    localStorage.setItem("mode", "light-mode");
+  } else {
+    localStorage.setItem("mode", "dark-mode");
+  }
+});
+
+searchToggle.addEventListener("click", () => {
+  searchToggle.classList.toggle("active");
+});
+
+//?======= SideBar Toggle =======?//
+
+sidebarOpen.addEventListener("click", () => {
+  nav.classList.add("active");
+});
+
+body.addEventListener("click", (e) => {
+  let clickedElm = e.target;
+
+  if (
+    !clickedElm.classList.contains("sidebarOpen") &&
+    !clickedElm.classList.contains("category-nav")
+  ) {
+    nav.classList.remove("active");
+  }
 });
