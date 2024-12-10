@@ -59,6 +59,8 @@ body {
     left: -100%;
     top: 0;
     padding: 20px;
+    display: flex;
+    direction: row;
     background-color: var(--side-nav);
     z-index: 100;
     transition: all 0.4s ease;
@@ -74,7 +76,7 @@ body {
   }
 
   .category-nav .logo-toggle {
-    display: block;
+    display: block !important;
     width: 100%;
     display: flex;
     align-items: center;
