@@ -1,4 +1,4 @@
-const apikey = "21e2a4f51691472e9628bcca6cb4b22b";
+const { apikey, BASE_URL } = window.config;
 
 const newsQuery = document.getElementById("search-result");
 const topNews = document.getElementById("top-news");
@@ -16,49 +16,11 @@ const searchToggle = document.querySelector(".searchToggle");
 const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
 
-//?======= Category News =======?//
-
-async function fetchCategoryNews(category) {
-  try {
-    const apiUrl = `https://newsapi.org/v2/everything?q=${category}&pageSize=16&apikey=${apikey}`;
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    return data.articles;
-  } catch (error) {
-    console.error("Error fetching category news", error);
-    return [];
-  }
-}
-
-function highlightActiveCategory(target) {
-  // Remove the 'active' class from all category links
-  document.querySelectorAll(".category-nav a").forEach((link) => {
-    link.classList.remove("active");
-  });
-
-  // Add the 'active' class to the clicked category link
-  target.classList.add("active");
-}
-
-categoryNav.addEventListener("click", async (event) => {
-  const target = event.target.closest("a");
-  if (target && target.dataset.category) {
-    const category = target.dataset.category;
-    highlightActiveCategory(target);
-    try {
-      const articles = await fetchCategoryNews(category);
-      displayBlogs(articles);
-    } catch (error) {
-      console.error("Error fetching category news:", error);
-    }
-  }
-});
-
 //?======= Top News =======?//
 
 async function fetchTopNews() {
   try {
-    const apiUrl = `https://newsapi.org/v2/top-headlines?country=us&pageSize=4&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/top-headlines?country=us&pageSize=4&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
@@ -115,7 +77,7 @@ function displayTopNews(articles) {
 
 async function fetchLocalNews() {
   try {
-    const apiUrl = `https://newsapi.org/v2/everything?q=assam&searchIn=title&pageSize=5&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=assam&searchIn=title&pageSize=5&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
@@ -172,7 +134,7 @@ function displayLocalNews(articles) {
 
 async function fetchRandomNews() {
   try {
-    const apiUrl = `https://newsapi.org/v2/everything?q=india&searchIn=title&pageSize=5&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=india&searchIn=title&pageSize=5&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
@@ -246,7 +208,7 @@ searchButton.addEventListener("click", async () => {
 
 async function fetchNewsQuery(query) {
   try {
-    const apiUrl = `https://newsapi.org/v2/everything?q=${query}&pageSize=10&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=${query}&pageSize=10&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;

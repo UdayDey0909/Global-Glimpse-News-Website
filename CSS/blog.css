@@ -1,42 +1,10 @@
 /*? Blog Section */
 
-#search-result {
-  color: var(--blog-text-color);
-  padding: 3.5rem 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-#top-news {
-  color: var(--blog-text-color);
-  padding: 3.5rem 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-#local-news {
-  color: var(--blog-text-color);
-  padding: 3.5rem 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
+#search-result,
+#top-news,
+#local-news,
+#business-news,
 #blog-container {
-  color: var(--blog-text-color);
-  padding: 3.5rem 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-#business-news {
   color: var(--blog-text-color);
   padding: 3.5rem 0;
   display: flex;

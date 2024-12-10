@@ -1,9 +1,7 @@
-const apikey = "21e2a4f51691472e9628bcca6cb4b22b";
+const { apikey, BASE_URL } = window.config;
 
 const newsQuery = document.getElementById("search-result");
 const businessNews = document.getElementById("business-news");
-const localNews = document.getElementById("local-news");
-const blogContainer = document.getElementById("blog-container");
 const searchField = document.getElementById("search-field");
 const searchButton = document.getElementById("search-button");
 
@@ -18,7 +16,7 @@ const sidebarClose = document.querySelector(".sidebarClose");
 
 async function fetchBusinessNews() {
   try {
-    const apiUrl = `https://newsapi.org/v2/everything?q=business&searchIn=title&pageSize=5&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=business&searchIn=title&pageSize=5&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
