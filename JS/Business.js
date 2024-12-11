@@ -14,15 +14,54 @@ const searchToggle = document.querySelector(".searchToggle");
 const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
 
+let page = 1; // Initialize page number for business news
+let isFetching = false; // Prevent multiple simultaneous fetches
+
+//?======= Fetch and Display Business News =======?//
 async function fetchBusinessNews() {
   try {
-    const apiUrl = `${BASE_URL}/everything?q=business&searchIn=title&pageSize=5&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=business&page=${page}&pageSize=4&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
   } catch (error) {
     console.error("Error fetching top news", error);
     return [];
+  }
+}
+
+function displayBusinessNews(articles) {
+  articles.forEach((article) => {
+    const blogCard = document.createElement("div");
+    blogCard.classList.add("blog-card");
+
+    const img = document.createElement("img");
+    img.src = article.urlToImage;
+    if (!article.urlToImage) return; // Skip if no image
+
+    const title = document.createElement("h2");
+    title.textContent = article.title;
+    if (article.title === "[Removed]") return; // Skip invalid titles
+
+    const description = document.createElement("p");
+    description.textContent = article.description || "Description unavailable";
+    if (!article.description) return; // Skip if no description
+
+    blogCard.appendChild(img);
+    blogCard.appendChild(title);
+    blogCard.appendChild(description);
+    blogCard.addEventListener("click", () => {
+      window.open(article.url, "_blank");
+    });
+    businessNews.appendChild(blogCard);
+  });
+
+  // Ensure the scroll anchor remains at the bottom
+  if (!document.querySelector("#scroll-anchor")) {
+    const newAnchor = document.createElement("div");
+    newAnchor.id = "scroll-anchor";
+    businessNews.appendChild(newAnchor);
+    observer.observe(newAnchor); // Re-observe the new anchor
   }
 }
 
@@ -35,47 +74,57 @@ async function fetchBusinessNews() {
   }
 })();
 
-function displayBusinessNews(articles) {
-  businessNews.innerHTML = "";
+//?======= Infinite Scrolling =======?//
+const observer = new IntersectionObserver(
+  async (entries) => {
+    const anchor = entries[0];
+    if (anchor.isIntersecting && !isFetching) {
+      isFetching = true; // Prevent duplicate fetches
 
-  articles.forEach((article) => {
-    const blogCard = document.createElement("div");
-    blogCard.classList.add("blog-card");
+      try {
+        // Increment page and fetch new articles
+        page += 1;
+        const articles = await fetchBusinessNews();
 
-    const img = document.createElement("img");
-    img.src = article.urlToImage;
-    if (img.src === "http://127.0.0.1:5500/null") {
-      return;
+        // Check if articles are returned; if not, stop observing
+        if (articles.length === 0) {
+          console.warn("No more articles to fetch.");
+          observer.unobserve(anchor.target); // Stop observing if no more articles
+          return;
+        }
+
+        // Display new articles
+        displayBusinessNews(articles);
+      } catch (error) {
+        console.error("Error fetching additional business news:", error);
+      } finally {
+        isFetching = false; // Reset fetching flag
+      }
     }
+  },
+  {
+    root: null, // Default to viewport
+    rootMargin: "100px",
+    threshold: 1.0, // Trigger when the anchor is fully visible
+  }
+);
 
-    const title = document.createElement("h2");
-    title.textContent = article.title;
-    if (article.title === "[Removed]") {
-      return;
-    }
-
-    const description = document.createElement("p");
-    description.textContent = article.description || "Null";
-    if (description.textContent === "Null") {
-      return;
-    }
-    blogCard.appendChild(img);
-    blogCard.appendChild(title);
-    blogCard.appendChild(description);
-    blogCard.addEventListener("click", () => {
-      window.open(article.url, "_blank");
-    });
-    businessNews.appendChild(blogCard);
-  });
+// Check for Scroll Anchor Element
+const scrollAnchor = document.querySelector("#scroll-anchor");
+if (scrollAnchor) {
+  observer.observe(scrollAnchor);
+} else {
+  console.warn("Scroll anchor element is missing or not defined.");
 }
 
 //?======= Search Query =======?//
-
 searchButton.addEventListener("click", async () => {
   const query = searchField.value.trim();
   if (query !== "") {
+    page = 1; // Reset page for new search query
     try {
       const articles = await fetchNewsQuery(query);
+      main.innerHTML = ""; // Clear previous results
       displayNewsQuery(articles);
     } catch (error) {
       console.log("Error fetching news by query", error);
@@ -85,7 +134,7 @@ searchButton.addEventListener("click", async () => {
 
 async function fetchNewsQuery(query) {
   try {
-    const apiUrl = `https://newsapi.org/v2/everything?q=${query}&pageSize=10&apikey=${apikey}`;
+    const apiUrl = `https://newsapi.org/v2/everything?q=${query}&page=${page}&pageSize=10&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
@@ -96,29 +145,22 @@ async function fetchNewsQuery(query) {
 }
 
 function displayNewsQuery(articles) {
-  main.innerHTML = "";
-
   articles.forEach((article) => {
     const blogCard = document.createElement("div");
     blogCard.classList.add("blog-card");
 
     const img = document.createElement("img");
     img.src = article.urlToImage;
-    if (img.src === "http://127.0.0.1:5500/null") {
-      return;
-    }
+    if (!article.urlToImage) return; // Skip if no image
 
     const title = document.createElement("h2");
     title.textContent = article.title;
-    if (article.title === "[Removed]") {
-      return;
-    }
+    if (article.title === "[Removed]") return; // Skip invalid titles
 
     const description = document.createElement("p");
-    description.textContent = article.description || "Null";
-    if (description.textContent === "Null") {
-      return;
-    }
+    description.textContent = article.description || "Description unavailable";
+    if (!article.description) return; // Skip if no description
+
     blogCard.appendChild(img);
     blogCard.appendChild(title);
     blogCard.appendChild(description);
@@ -130,7 +172,6 @@ function displayNewsQuery(articles) {
 }
 
 //?======= Dark Mode Toggle =======?//
-
 let getMode = localStorage.getItem("mode");
 if (getMode && getMode === "dark-mode") {
   body.classList.add("dark-mode");
@@ -152,7 +193,6 @@ searchToggle.addEventListener("click", () => {
 });
 
 //?======= SideBar Toggle =======?//
-
 sidebarOpen.addEventListener("click", () => {
   nav.classList.add("active");
 });
