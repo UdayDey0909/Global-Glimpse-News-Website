@@ -45,6 +45,11 @@ body {
   margin: auto;
 }
 
+.article-width {
+  max-width: 1400px;
+  margin: auto;
+}
+
 /**======= Mobile Version =======**/
 
 @media (max-width: 1090px) {

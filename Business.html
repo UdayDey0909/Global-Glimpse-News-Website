@@ -20,78 +20,81 @@
   </head>
 
   <body>
-    <nav>
-      <div class="navbar">
-        <i class="bx bx-menu sidebarOpen"></i>
-        <span class="logo navLogo"
-          ><a href="HomePage.html">Global Glimpse</a></span
-        >
+    <header class="obj-width">
+      <nav>
+        <div class="navbar">
+          <i class="bx bx-menu sidebarOpen"></i>
+          <span class="logo navLogo"
+            ><a href="HomePage.html">Global Glimpse</a></span
+          >
 
-        <div class="category-nav">
-          <div class="logo-toggle">
-            <span class="logo categoryLogo"
-              ><a href="HomePage.html">GlobalGlimpse</a></span
-            >
-            <i class="bx bx-x sidebarClose"></i>
-          </div>
-          <ul class="nav-links">
-            <li>
-              <a href="Business.html" data-category="business">Business</a>
-            </li>
-            <li>
-              <a href="Entertainment.html" data-category="entertainment"
-                >Entertainment</a
+          <div class="category-nav">
+            <div class="logo-toggle">
+              <span class="logo categoryLogo"
+                ><a href="HomePage.html">GlobalGlimpse</a></span
               >
-            </li>
-            <li>
-              <a href="Technology.html" data-category="technology"
-                >Technology</a
-              >
-            </li>
-            <li>
-              <a href="Health.html" data-category="health">Health</a>
-            </li>
-            <li>
-              <a href="Sports.html" data-category="sports">Sports</a>
-            </li>
-            <li>
-              <a href="Science.html" data-category="science">Science</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="darkLight-searchBox">
-          <div class="dark-light">
-            <i class="bx bx-moon moon"></i>
-            <i class="bx bx-sun sun"></i>
+              <i class="bx bx-x sidebarClose"></i>
+            </div>
+            <ul class="nav-links">
+              <li>
+                <a href="Business.html" data-category="business">Business</a>
+              </li>
+              <li>
+                <a href="Entertainment.html" data-category="entertainment"
+                  >Entertainment</a
+                >
+              </li>
+              <li>
+                <a href="Technology.html" data-category="technology"
+                  >Technology</a
+                >
+              </li>
+              <li>
+                <a href="Health.html" data-category="health">Health</a>
+              </li>
+              <li>
+                <a href="Sports.html" data-category="sports">Sports</a>
+              </li>
+              <li>
+                <a href="Science.html" data-category="science">Science</a>
+              </li>
+            </ul>
           </div>
 
-          <div class="searchBox">
-            <div class="searchToggle">
-              <i class="bx bx-x cancel"></i>
-              <i class="bx bx-search search"></i>
+          <div class="darkLight-searchBox">
+            <div class="dark-light">
+              <i class="bx bx-moon moon"></i>
+              <i class="bx bx-sun sun"></i>
             </div>
 
-            <div class="search-field">
-              <input
-                type="text"
-                id="search-field"
-                placeholder="Search News Here..."
-              />
-              <i class="bx bx-search" id="search-button"></i>
+            <div class="searchBox">
+              <div class="searchToggle">
+                <i class="bx bx-x cancel"></i>
+                <i class="bx bx-search search"></i>
+              </div>
+
+              <div class="search-field">
+                <input
+                  type="text"
+                  id="search-field"
+                  placeholder="Search News Here..."
+                />
+                <i class="bx bx-search" id="search-button"></i>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
 
-    <section id="">
-      <article id="search-result"></article>
-    </section>
-
-    <main class="obj-width">
       <section id="">
-        <h1>Business</h1>
+        <article id="search-result"></article>
+      </section>
+    </header>
+
+    <main class="article-width">
+      <section id="">
+        <div id="total-results"></div>
+
         <div id="business-news"></div>
         <div id="scroll-anchor"></div>
       </section>

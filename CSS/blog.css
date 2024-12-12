@@ -14,7 +14,7 @@
 }
 
 .blog-card {
-  width: 500px;
+  width: 400px;
   border: 1px solid #2d4c50;
   border-radius: 10px;
   cursor: pointer;
@@ -59,4 +59,12 @@
   -webkit-line-clamp: 3; /* Limit to 3 lines */
   line-clamp: 3; /* Standard property for compatibility */
   -webkit-box-orient: vertical;
+}
+
+#total-results {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 2.2rem;
+  color: var(--text-color); /* Use your theme's text color variable */
+  font-family: "Poppins", sans-serif; /* Match your website's font */
 }

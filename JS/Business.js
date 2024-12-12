@@ -5,7 +5,6 @@ const businessNews = document.getElementById("business-news");
 const searchField = document.getElementById("search-field");
 const searchButton = document.getElementById("search-button");
 
-const categoryNav = document.querySelector(".category-nav");
 const main = document.querySelector("main");
 const body = document.querySelector("body");
 const nav = document.querySelector("nav");
@@ -18,11 +17,20 @@ let page = 1; // Initialize page number for business news
 let isFetching = false; // Prevent multiple simultaneous fetches
 
 //?======= Fetch and Display Business News =======?//
+
 async function fetchBusinessNews() {
   try {
-    const apiUrl = `${BASE_URL}/everything?q=business&page=${page}&pageSize=4&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=business&searchIn=title,description&page=${page}&pageSize=8&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
+
+    // Display total results dynamically
+    const totalResults = data.totalResults || 0;
+    const totalResultsElement = document.getElementById("total-results");
+    if (totalResultsElement) {
+      totalResultsElement.textContent = `Total Business Articles: ${totalResults}`;
+    }
+
     return data.articles;
   } catch (error) {
     console.error("Error fetching top news", error);
@@ -31,6 +39,7 @@ async function fetchBusinessNews() {
 }
 
 function displayBusinessNews(articles) {
+  const scrollAnchor = document.querySelector("#scroll-anchor");
   articles.forEach((article) => {
     const blogCard = document.createElement("div");
     blogCard.classList.add("blog-card");
@@ -53,16 +62,14 @@ function displayBusinessNews(articles) {
     blogCard.addEventListener("click", () => {
       window.open(article.url, "_blank");
     });
-    businessNews.appendChild(blogCard);
-  });
 
-  // Ensure the scroll anchor remains at the bottom
-  if (!document.querySelector("#scroll-anchor")) {
-    const newAnchor = document.createElement("div");
-    newAnchor.id = "scroll-anchor";
-    businessNews.appendChild(newAnchor);
-    observer.observe(newAnchor); // Re-observe the new anchor
-  }
+    // Check if scrollAnchor exists and is a child of businessNews
+    if (scrollAnchor && businessNews.contains(scrollAnchor)) {
+      businessNews.insertBefore(blogCard, scrollAnchor);
+    } else {
+      businessNews.appendChild(blogCard); // Fallback if scrollAnchor is not found
+    }
+  });
 }
 
 (async () => {
@@ -77,44 +84,28 @@ function displayBusinessNews(articles) {
 //?======= Infinite Scrolling =======?//
 const observer = new IntersectionObserver(
   async (entries) => {
-    const anchor = entries[0];
-    if (anchor.isIntersecting && !isFetching) {
-      isFetching = true; // Prevent duplicate fetches
+    const anchor = document.querySelector("#scroll-anchor");
+    if (anchor && entries[0].isIntersecting && !isFetching) {
+      isFetching = true; // Set fetching flag
+      page += 1; // Increment page
 
-      try {
-        // Increment page and fetch new articles
-        page += 1;
-        const articles = await fetchBusinessNews();
+      //! Add no article to fetch console warning when the end is reached !//
 
-        // Check if articles are returned; if not, stop observing
-        if (articles.length === 0) {
-          console.warn("No more articles to fetch.");
-          observer.unobserve(anchor.target); // Stop observing if no more articles
-          return;
-        }
-
-        // Display new articles
-        displayBusinessNews(articles);
-      } catch (error) {
-        console.error("Error fetching additional business news:", error);
-      } finally {
-        isFetching = false; // Reset fetching flag
-      }
+      const articles = await fetchBusinessNews();
+      displayBusinessNews(articles);
+      isFetching = false; // Reset fetching flag
     }
   },
   {
-    root: null, // Default to viewport
+    root: null, // Observe scrolling in the viewport
     rootMargin: "100px",
-    threshold: 1.0, // Trigger when the anchor is fully visible
+    threshold: 1.0, // Trigger when the target is fully visible
   }
 );
 
-// Check for Scroll Anchor Element
 const scrollAnchor = document.querySelector("#scroll-anchor");
 if (scrollAnchor) {
-  observer.observe(scrollAnchor);
-} else {
-  console.warn("Scroll anchor element is missing or not defined.");
+  observer.observe(scrollAnchor); // Add an anchor element at the bottom of the business news section
 }
 
 //?======= Search Query =======?//
