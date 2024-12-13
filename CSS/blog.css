@@ -1,9 +1,11 @@
-/** Google Font Import - Poppins & Roboto */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@300;400&display=swap");
-
 /*? Blog Section */
 
+#search-result,
+#top-news,
+#local-news,
+#business-news,
 #blog-container {
+  color: var(--blog-text-color);
   padding: 3.5rem 0;
   display: flex;
   justify-content: flex-start;
@@ -11,8 +13,29 @@
   flex-wrap: wrap;
 }
 
+#top-section {
+  padding-top: 5rem;
+}
+
+#end-of-results {
+  text-align: center;
+  font-size: 1.2em;
+  color: #555;
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: none; /* Initially hidden */
+}
+
+#end-of-results p {
+  margin: 0;
+  font-weight: 500;
+}
+
 .blog-card {
-  width: 500px;
+  width: 400px;
   border: 1px solid #2d4c50;
   border-radius: 10px;
   cursor: pointer;
@@ -39,7 +62,8 @@
 /*? Truncation */
 
 .blog-card h2 {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
+  font-family: "Poppins", sans-serif;
   margin-bottom: 0.7rem;
   white-space: nowrap;
   overflow: hidden;
@@ -56,4 +80,12 @@
   -webkit-line-clamp: 3; /* Limit to 3 lines */
   line-clamp: 3; /* Standard property for compatibility */
   -webkit-box-orient: vertical;
+}
+
+#total-results {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 2.2rem;
+  color: var(--text-color); /* Use your theme's text color variable */
+  font-family: "Poppins", sans-serif; /* Match your website's font */
 }

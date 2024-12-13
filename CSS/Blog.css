@@ -1,9 +1,43 @@
-/** Google Font Import - Poppins & Roboto */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@300;400&display=swap");
-
 /*? Blog Section */
 
+#search-result {
+  color: var(--blog-text-color);
+  padding: 3.5rem 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+#top-news {
+  color: var(--blog-text-color);
+  padding: 3.5rem 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+#local-news {
+  color: var(--blog-text-color);
+  padding: 3.5rem 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
 #blog-container {
+  color: var(--blog-text-color);
+  padding: 3.5rem 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+#business-news {
+  color: var(--blog-text-color);
   padding: 3.5rem 0;
   display: flex;
   justify-content: flex-start;
@@ -39,7 +73,8 @@
 /*? Truncation */
 
 .blog-card h2 {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
+  font-family: "Poppins", sans-serif;
   margin-bottom: 0.7rem;
   white-space: nowrap;
   overflow: hidden;

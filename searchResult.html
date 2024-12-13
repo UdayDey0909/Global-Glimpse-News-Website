@@ -20,7 +20,7 @@
   </head>
 
   <body>
-    <header>
+    <header class="obj-width">
       <nav>
         <div class="navbar">
           <i class="bx bx-menu sidebarOpen"></i>
@@ -86,29 +86,21 @@
         </div>
       </nav>
 
-      <section id="">
-        <article id="search-result"></article>
-      </section>
-    </header>
-
-    <main class="article-width">
-      <section id="">
-        <h1>Top News</h1>
-        <article id="top-news"></article>
-      </section>
-
-      <section id="">
-        <h1>For You</h1>
-        <article id="local-news"></article>
-      </section>
-
-      <section id="latestRelease">
-        <h1>Latest Releases</h1>
-        <article id="blog-container"></article>
+      <main class="article-width">
+      <section id="top-section">
+        <h1>Search Results</h1>
+        <div id="total-results"></div>
+        <div id="search-result" class="result-container"></div>
+        <div id="scroll-anchor"></div>
       </section>
     </main>
 
+    <footer>
+      <!-- Include your footer content -->
+      <p>&copy; 2024 Global Glimpse. All Rights Reserved.</p>
+    </footer>
+
     <script src="JS/config.js"></script>
-    <script src="JS/script.js"></script>
+    <script src="JS/Search.js"></script>
   </body>
 </html>

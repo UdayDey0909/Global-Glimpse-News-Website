@@ -1,33 +1,92 @@
-/** Google Font Import - Poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@300;400&display=swap");
-
 /*? Navigation Bar */
 
 nav {
-  /*! position: fixed; add fixed nav bar */
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 70px;
   width: 100%;
-  background-color: #2d4c50;
+  background-color: var(--nav-color);
   box-shadow: 0 7px 10px rgba(0, 0, 0, 0.3);
+  z-index: 100;
 }
 
-.navbar {
+nav .navbar {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  max-width: 1600px;
+  background-color: var(--nav-color);
+  margin: 0 auto;
+  padding: 0 30px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 1.3rem 0;
 }
 
-.logo-container {
+nav .navbar .sidebarOpen {
+  color: var(--text-color);
+  font-size: 25px;
+  padding: 5px;
+  cursor: pointer;
+  display: none;
+}
+
+nav .navbar .logo a {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.category-nav .logo-toggle {
+  display: none;
+}
+
+/*! hover opacity */
+
+nav .navbar .logo a::before {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: var(--text-color);
+}
+
+.navbar .nav-links {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
-.navbar .logo {
-  font-size: 2.2rem;
-  color: #fff;
+.navbar .nav-links li {
+  margin: 0 5px;
+  list-style: none;
+}
+
+.nav-links li a {
+  position: relative;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text-color);
   text-decoration: none;
-  letter-spacing: 2px;
+  padding: 10px;
+}
+
+.nav-links li a::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--text-color);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.nav-links li:hover a::before {
+  opacity: 1;
 }
 
 .navbar .darkLight-searchBox {
@@ -48,8 +107,8 @@ nav {
 .dark-light i,
 .searchToggle i {
   position: absolute;
-  color: aliceblue;
-  font-size: 30px;
+  color: var(--text-color);
+  font-size: 22px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -96,7 +155,7 @@ nav {
   width: 300px;
   display: flex;
   align-items: center;
-  background-color: #2d4c50;
+  background-color: var(--nav-color);
   padding: 3px;
   border-radius: 6px;
   font-size: 14px;
@@ -120,7 +179,7 @@ nav {
   top: -4px;
   height: 12px;
   width: 12px;
-  background-color: #2d4c50;
+  background-color: var(--nav-color);
   transform: rotate(-45deg);
   z-index: -1;
 }
@@ -132,14 +191,52 @@ nav {
   outline: none;
   border: none;
   border-radius: 4px;
-  color: black;
-  /*! background-color: #2d4c50; add dark mode*/
+  color: var(--search-text);
+  background-color: var(--search-bar);
 }
 
 .search-field i {
   position: absolute;
-  color: #000;
+  color: var(--nav-color);
   right: 15px;
   font-size: 22px;
   cursor: pointer;
 }
+
+.category-nav {
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+  padding-bottom: 0.3rem;
+}
+
+.category-nav a.active {
+  background-color: #2d4c50;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/*? ======= Header ======= ?*/
+
+/* header {
+  position: fixed;
+  width: 100%;
+  background-color: var(--nav-color);
+  box-shadow: 0 7px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+li {
+  list-style: none;
+}
+
+header a {
+  text-decoration: none;
+  color: black;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s;
+} */
