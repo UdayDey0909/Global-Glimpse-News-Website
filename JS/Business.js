@@ -1,11 +1,12 @@
-const { apikey, BASE_URL } = window.config;
+let { apikey, BASE_URL } = window.config;
+
+//~========== DOM Elements ==========~//
 
 const newsQuery = document.getElementById("search-result");
 const businessNews = document.getElementById("business-news");
 const searchField = document.getElementById("search-field");
 const searchButton = document.getElementById("search-button");
-
-const main = document.querySelector("main");
+const scrollAnchor = document.querySelector("#scroll-anchor");
 const body = document.querySelector("body");
 const nav = document.querySelector("nav");
 const modeToggle = document.querySelector(".dark-light");
@@ -13,10 +14,12 @@ const searchToggle = document.querySelector(".searchToggle");
 const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
 
-let page = 1; // Initialize page number for business news
-let isFetching = false; // Prevent multiple simultaneous fetches
+//~========== Fetch and Display Business News ==========~//
 
-//?======= Fetch and Display Business News =======?//
+let page = 1;
+let isFetching = false;
+
+//? API URL
 
 async function fetchBusinessNews() {
   try {
@@ -24,7 +27,8 @@ async function fetchBusinessNews() {
     const response = await fetch(apiUrl);
     const data = await response.json();
 
-    // Display total results dynamically
+    //? Display total results dynamically
+
     const totalResults = data.totalResults || 0;
     const totalResultsElement = document.getElementById("total-results");
     if (totalResultsElement) {
@@ -37,24 +41,26 @@ async function fetchBusinessNews() {
     return [];
   }
 }
+//? Remove Corrupt Cards
 
 function displayBusinessNews(articles) {
-  const scrollAnchor = document.querySelector("#scroll-anchor");
   articles.forEach((article) => {
     const blogCard = document.createElement("div");
     blogCard.classList.add("blog-card");
 
     const img = document.createElement("img");
     img.src = article.urlToImage;
-    if (!article.urlToImage) return; // Skip if no image
+    if (!article.urlToImage) return;
 
     const title = document.createElement("h2");
     title.textContent = article.title;
-    if (article.title === "[Removed]") return; // Skip invalid titles
+    if (article.title === "[Removed]") return;
 
     const description = document.createElement("p");
-    description.textContent = article.description || "Description unavailable";
-    if (!article.description) return; // Skip if no description
+    description.textContent = article.description;
+    if (!article.description) return;
+
+    //?Create Business News Cards
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
@@ -63,14 +69,17 @@ function displayBusinessNews(articles) {
       window.open(article.url, "_blank");
     });
 
-    // Check if scrollAnchor exists and is a child of businessNews
+    //? Check if scrollAnchor exists for infinite scrolling
+
     if (scrollAnchor && businessNews.contains(scrollAnchor)) {
       businessNews.insertBefore(blogCard, scrollAnchor);
     } else {
-      businessNews.appendChild(blogCard); // Fallback if scrollAnchor is not found
+      businessNews.appendChild(blogCard);
     }
   });
 }
+
+//? Fetch & Display Business News Cards
 
 (async () => {
   try {
@@ -81,92 +90,75 @@ function displayBusinessNews(articles) {
   }
 })();
 
-//?======= Infinite Scrolling =======?//
+//~========== Infinite Scrolling ==========~//
+
 const observer = new IntersectionObserver(
   async (entries) => {
-    const anchor = document.querySelector("#scroll-anchor");
-    if (anchor && entries[0].isIntersecting && !isFetching) {
-      isFetching = true; // Set fetching flag
-      page += 1; // Increment page
-
-      //! Add no article to fetch console warning when the end is reached !//
+    const endOfResultsMessage = document.getElementById("end-of-results");
+    if (entries[0].isIntersecting && !isFetching) {
+      isFetching = true;
+      page++;
 
       const articles = await fetchBusinessNews();
-      displayBusinessNews(articles);
-      isFetching = false; // Reset fetching flag
+
+      //? End of the results
+
+      if (articles.length > 0) {
+        displayBusinessNews(articles);
+      } else {
+        if (endOfResultsMessage) {
+          endOfResultsMessage.style.display = "block";
+        }
+        observer.unobserve(scrollAnchor);
+      }
+
+      isFetching = false;
     }
   },
   {
-    root: null, // Observe scrolling in the viewport
+    root: null,
     rootMargin: "100px",
-    threshold: 1.0, // Trigger when the target is fully visible
+    threshold: 0.7,
   }
 );
 
-const scrollAnchor = document.querySelector("#scroll-anchor");
+//? re-adds the anchor element at the bottom of the page
+
 if (scrollAnchor) {
-  observer.observe(scrollAnchor); // Add an anchor element at the bottom of the business news section
+  observer.observe(scrollAnchor);
 }
 
-//?======= Search Query =======?//
-searchButton.addEventListener("click", async () => {
+//~========== Search Handle & Redirect ==========~//
+
+//? Redirects with the search query in the URL
+
+searchButton.addEventListener("click", () => {
   const query = searchField.value.trim();
-  if (query !== "") {
-    page = 1; // Reset page for new search query
-    try {
-      const articles = await fetchNewsQuery(query);
-      main.innerHTML = ""; // Clear previous results
-      displayNewsQuery(articles);
-    } catch (error) {
-      console.log("Error fetching news by query", error);
-    }
+  if (query) {
+    window.location.href = `searchResult.html?query=${encodeURIComponent(
+      query
+    )}`;
+  } else {
+    console.warn("Search query is empty");
   }
 });
 
-async function fetchNewsQuery(query) {
-  try {
-    const apiUrl = `https://newsapi.org/v2/everything?q=${query}&page=${page}&pageSize=10&apikey=${apikey}`;
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    return data.articles;
-  } catch (error) {
-    console.error("Error fetching random news", error);
-    return [];
-  }
-}
+//?Search Button
 
-function displayNewsQuery(articles) {
-  articles.forEach((article) => {
-    const blogCard = document.createElement("div");
-    blogCard.classList.add("blog-card");
+searchToggle.addEventListener("click", () => {
+  searchToggle.classList.toggle("active");
+});
 
-    const img = document.createElement("img");
-    img.src = article.urlToImage;
-    if (!article.urlToImage) return; // Skip if no image
+//~========== Dark Mode  ==========?//
 
-    const title = document.createElement("h2");
-    title.textContent = article.title;
-    if (article.title === "[Removed]") return; // Skip invalid titles
+//? Stores the user preferences
 
-    const description = document.createElement("p");
-    description.textContent = article.description || "Description unavailable";
-    if (!article.description) return; // Skip if no description
-
-    blogCard.appendChild(img);
-    blogCard.appendChild(title);
-    blogCard.appendChild(description);
-    blogCard.addEventListener("click", () => {
-      window.open(article.url, "_blank");
-    });
-    newsQuery.appendChild(blogCard);
-  });
-}
-
-//?======= Dark Mode Toggle =======?//
 let getMode = localStorage.getItem("mode");
 if (getMode && getMode === "dark-mode") {
   body.classList.add("dark-mode");
 }
+
+//? Toggle Between Dark & Light Mode
 
 modeToggle.addEventListener("click", () => {
   modeToggle.classList.toggle("active");
@@ -179,14 +171,13 @@ modeToggle.addEventListener("click", () => {
   }
 });
 
-searchToggle.addEventListener("click", () => {
-  searchToggle.classList.toggle("active");
-});
+//~========== SideBar Toggle for Smaller Devices ==========~//
 
-//?======= SideBar Toggle =======?//
 sidebarOpen.addEventListener("click", () => {
   nav.classList.add("active");
 });
+
+//? Tap anywhere to close the sidebar
 
 body.addEventListener("click", (e) => {
   let clickedElm = e.target;

@@ -13,6 +13,27 @@
   flex-wrap: wrap;
 }
 
+#top-section {
+  padding-top: 5rem;
+}
+
+#end-of-results {
+  text-align: center;
+  font-size: 1.2em;
+  color: #555;
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: none; /* Initially hidden */
+}
+
+#end-of-results p {
+  margin: 0;
+  font-weight: 500;
+}
+
 .blog-card {
   width: 400px;
   border: 1px solid #2d4c50;
