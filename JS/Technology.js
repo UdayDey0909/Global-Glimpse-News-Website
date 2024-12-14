@@ -2,7 +2,7 @@ const { apikey, BASE_URL } = window.config;
 
 //~========== DOM Elements ==========~//
 
-const searchResult = document.getElementById("search-result");
+const technologyNews = document.getElementById("technology-news");
 const searchField = document.getElementById("search-field");
 const searchButton = document.getElementById("search-button");
 const scrollAnchor = document.querySelector("#scroll-anchor");
@@ -13,39 +13,16 @@ const searchToggle = document.querySelector(".searchToggle");
 const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
 
-//~========== Fetch and Display Business News ==========~//
+//~========== Fetch and Display Technology News ==========~//
 
 let page = 1;
 let isFetching = false;
 
-//?======= Search Query =======?//
-
-const urlParams = new URLSearchParams(window.location.search);
-const initialQuery = urlParams.get("query"); // Get 'query' parameter
-
-// Automatically fetch and display results if a query is provided
-if (initialQuery) {
-  fetchAndDisplayResults(initialQuery);
-}
-
-async function fetchAndDisplayResults(query) {
-  page = 1; // Reset page for new query
-  try {
-    const articles = await fetchSearchResult(query);
-    searchResult.innerHTML = ""; // Clear previous results
-    fetchSearchResult(articles);
-  } catch (error) {
-    console.error("Error fetching news by query", error);
-  }
-}
-
 //? API URL
 
-async function fetchSearchResult(query) {
+async function fetchTechnologyNews() {
   try {
-    const apiUrl = `${BASE_URL}/everything?q=${encodeURIComponent(
-      query
-    )}&searchIn=title,description&page=${page}&pageSize=8&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=technology&searchIn=title,description&page=${page}&pageSize=8&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
 
@@ -54,19 +31,19 @@ async function fetchSearchResult(query) {
     const totalResults = data.totalResults || 0;
     const totalResultsElement = document.getElementById("total-results");
     if (totalResultsElement) {
-      totalResultsElement.textContent = `Total ${query} Articles: ${totalResults}`;
+      totalResultsElement.textContent = `Total Technology Articles: ${totalResults}`;
     }
 
     return data.articles;
   } catch (error) {
-    console.error("Error fetching random news", error);
+    console.error("Error fetching Technology news", error);
     return [];
   }
 }
 
 //? Remove Corrupt Cards
 
-function displaySearchResult(articles) {
+function displayTechnologyNews(articles) {
   articles.forEach((article) => {
     const blogCard = document.createElement("div");
     blogCard.classList.add("blog-card");
@@ -83,7 +60,7 @@ function displaySearchResult(articles) {
     description.textContent = article.description;
     if (!article.description) return;
 
-    //? Create Searched News Cards
+    //? Create Technology News Cards
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
@@ -94,36 +71,24 @@ function displaySearchResult(articles) {
 
     //? Check if scrollAnchor exists for infinite scrolling
 
-    if (scrollAnchor && searchResult.contains(scrollAnchor)) {
-      searchResult.insertBefore(blogCard, scrollAnchor);
+    if (scrollAnchor && technologyNews.contains(scrollAnchor)) {
+      technologyNews.insertBefore(blogCard, scrollAnchor);
     } else {
-      searchResult.appendChild(blogCard);
+      technologyNews.appendChild(blogCard);
     }
   });
 }
 
-/* (async () => {
+//? Fetch & Display Technology News Cards
+
+(async () => {
   try {
-    const articles = await fetchSearchResult();
-    displaySearchResult(articles);
+    const articles = await fetchTechnologyNews();
+    displayTechnologyNews(articles);
   } catch (error) {
-    console.error("Error fetching ${query} News:", error);
+    console.error("Error fetching Technology News:", error);
   }
 })();
-
-searchButton.addEventListener("click", async () => {
-  const query = searchField.value.trim();
-  if (query !== "") {
-    page = 1; // Reset page for new search query
-    try {
-      const articles = await fetchSearchResult(query);
-      searchResult.innerHTML = ""; // Clear previous results
-      displaySearchResult(articles);
-    } catch (error) {
-      console.log("Error fetching news by query", error);
-    }
-  }
-}); */
 
 //~========== Infinite Scrolling ==========~//
 
@@ -134,12 +99,12 @@ const observer = new IntersectionObserver(
       isFetching = true;
       page++;
 
-      const articles = await fetchSearchResult();
+      const articles = await fetchTechnologyNews();
 
       //? End of the results
 
       if (articles.length > 0) {
-        displaySearchResult(articles);
+        displayTechnologyNews(articles);
       } else {
         if (endOfResultsMessage) {
           endOfResultsMessage.style.display = "block";

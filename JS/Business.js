@@ -36,7 +36,7 @@ async function fetchBusinessNews() {
 
     return data.articles;
   } catch (error) {
-    console.error("Error fetching top news", error);
+    console.error("Error fetching Business news", error);
     return [];
   }
 }
