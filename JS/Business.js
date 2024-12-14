@@ -1,8 +1,7 @@
-let { apikey, BASE_URL } = window.config;
+const { apikey, BASE_URL } = window.config;
 
 //~========== DOM Elements ==========~//
 
-const newsQuery = document.getElementById("search-result");
 const businessNews = document.getElementById("business-news");
 const searchField = document.getElementById("search-field");
 const searchButton = document.getElementById("search-button");
@@ -41,6 +40,7 @@ async function fetchBusinessNews() {
     return [];
   }
 }
+
 //? Remove Corrupt Cards
 
 function displayBusinessNews(articles) {
@@ -60,7 +60,7 @@ function displayBusinessNews(articles) {
     description.textContent = article.description;
     if (!article.description) return;
 
-    //?Create Business News Cards
+    //? Create Business News Cards
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
@@ -86,7 +86,7 @@ function displayBusinessNews(articles) {
     const articles = await fetchBusinessNews();
     displayBusinessNews(articles);
   } catch (error) {
-    console.error("Error fetching top news:", error);
+    console.error("Error fetching Business News:", error);
   }
 })();
 
