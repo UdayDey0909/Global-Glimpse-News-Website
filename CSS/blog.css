@@ -6,6 +6,7 @@
 #business-news,
 #technology-news,
 #entertainment-news,
+#health-news,
 #blog-container {
   color: var(--blog-text-color);
   padding: 3.5rem 0;
