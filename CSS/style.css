@@ -1,8 +1,11 @@
-/**======= Google Font Import - Poppins & Roboto =======**/
+/**========== Google Font Import - Poppins & Roboto ==========**/
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@300;400&display=swap");
 
-/**======= Colors =======**/
+/**========== Colors ==========**/
+
+/*? Color: Light Mode ?*/
+
 :root {
   --body-color: #edf6f9;
   --nav-color: #2d4c50;
@@ -13,6 +16,8 @@
   --search-bar: #f2f2f2;
   --end-of-results: #121212;
 }
+
+/*? Color: Dark Mode ?*/
 
 body.dark-mode {
   --body-color: #121212;
@@ -25,7 +30,7 @@ body.dark-mode {
   --end-of-results: #f2f2f2;
 }
 
-/**======= Global reset =======**/
+/**========== Global reset ==========**/
 
 * {
   margin: 0;
@@ -34,7 +39,7 @@ body.dark-mode {
   font-family: "Poppins", sans-serif;
 }
 
-/**======= Base Style =======**/
+/**========== Base Style & Margin ==========**/
 
 body {
   height: 100vh;
@@ -42,22 +47,30 @@ body {
   color: var(--blog-text-color);
 }
 
+/*? Body & Nav Margin ?*/
+
 .obj-width {
   max-width: 1600px;
   margin: auto;
 }
+
+/*? Article Container Margin ?*/
 
 .article-width {
   max-width: 1400px;
   margin: auto;
 }
 
-/**======= Mobile Version =======**/
+/**========== Mobile Version ==========**/
 
 @media (max-width: 1090px) {
+  /*? Menu Icon ?*/
+
   nav .navbar .sidebarOpen {
     display: block !important;
   }
+
+  /*? Transforms the Nav Category into Sidebar & invisible by-default ?*/
 
   .category-nav {
     position: fixed;
@@ -67,20 +80,26 @@ body {
     top: 0;
     padding: 20px;
     display: flex;
-    direction: row;
+    direction: column;
     background-color: var(--side-nav);
     z-index: 100;
     transition: all 0.4s ease;
   }
 
+  /*? Makes the Sidebar Visible ?*/
+
   nav.active .category-nav {
     left: 0;
   }
+
+  /*? Hide Main Logo when sidebar active  ?*/
 
   nav.active .navbar .navLogo a {
     opacity: 0;
     transition: opacity 0.3s ease;
   }
+
+  /*? Sidebar Logo & Close Icon ?*/
 
   .category-nav .logo-toggle {
     display: block !important;
@@ -90,11 +109,15 @@ body {
     justify-content: space-between;
   }
 
+  /*? Close Icon ?*/
+
   .logo-toggle .sidebarClose {
     color: var(--text-color);
     font-size: 24px;
     cursor: pointer;
   }
+
+  /*? Category ?*/
 
   .navbar .nav-links {
     flex-direction: column;
@@ -106,6 +129,14 @@ body {
     margin-top: 30px;
   }
 
+  /*? Article Cards ?*/
+
+  .blog-card {
+    width: 100%;
+  }
+
+  /*! invalid || need correction */
+
   .search-container {
     flex-direction: column;
     align-items: stretch;
@@ -114,9 +145,5 @@ body {
 
   #search-input {
     width: 150px;
-  }
-
-  .blog-card {
-    width: 100%;
   }
 }
