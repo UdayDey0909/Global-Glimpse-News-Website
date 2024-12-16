@@ -11,6 +11,7 @@
   --side-nav: #010718;
   --search-text: #010718;
   --search-bar: #f2f2f2;
+  --end-of-results: #121212;
 }
 
 body.dark-mode {
@@ -21,6 +22,7 @@ body.dark-mode {
   --side-nav: #242526;
   --search-text: #fff;
   --search-bar: #121212;
+  --end-of-results: #f2f2f2;
 }
 
 /**======= Global reset =======**/

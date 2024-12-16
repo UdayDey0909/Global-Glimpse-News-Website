@@ -22,7 +22,7 @@ let isFetching = false;
 
 async function fetchBusinessNews() {
   try {
-    const apiUrl = `${BASE_URL}/everything?q=business&searchIn=title,description&page=${page}&pageSize=8&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/top-headlines?q=business&searchIn=title,description&page=${page}&pageSize=8&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
 
