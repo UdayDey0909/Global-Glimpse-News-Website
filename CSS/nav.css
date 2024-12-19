@@ -1,4 +1,6 @@
-/*? Navigation Bar */
+/**========== Navigation Section ==========**/
+
+/*? Main Nav ?*/
 
 nav {
   position: fixed;
@@ -24,13 +26,7 @@ nav .navbar {
   justify-content: space-between;
 }
 
-nav .navbar .sidebarOpen {
-  color: var(--text-color);
-  font-size: 25px;
-  padding: 5px;
-  cursor: pointer;
-  display: none;
-}
+/*? Main & Sidebar Logo ?*/
 
 nav .navbar .logo a {
   font-size: 2rem;
@@ -39,17 +35,43 @@ nav .navbar .logo a {
   text-decoration: none;
 }
 
-.category-nav .logo-toggle {
-  display: none;
-}
-
-/*! hover opacity */
-
 nav .navbar .logo a::before {
   position: absolute;
   width: 6px;
   height: 6px;
   background-color: var(--text-color);
+}
+
+/*? Sidebar Menu Icon: Invisible by-default ?*/
+
+nav .navbar .sidebarOpen {
+  color: var(--text-color);
+  font-size: 25px;
+  padding: 5px;
+  cursor: pointer;
+  display: none;
+}
+
+/*? Sidebar Logo ?*/
+
+.category-nav .logo-toggle {
+  display: none;
+}
+
+/**========== Category Section ==========**/
+
+.category-nav {
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+  padding-bottom: 0.3rem;
+}
+
+.category-nav a.active {
+  background-color: #2d4c50;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 .navbar .nav-links {
@@ -88,6 +110,8 @@ nav .navbar .logo a::before {
 .nav-links li:hover a::before {
   opacity: 1;
 }
+
+/**========== Theme & Search Section ==========**/
 
 .navbar .darkLight-searchBox {
   display: flex;
@@ -202,41 +226,3 @@ nav .navbar .logo a::before {
   font-size: 22px;
   cursor: pointer;
 }
-
-.category-nav {
-  display: flex;
-  justify-content: center;
-  align-items: space-between;
-  padding-bottom: 0.3rem;
-}
-
-.category-nav a.active {
-  background-color: #2d4c50;
-  color: #fff;
-  border-radius: 5px;
-  font-weight: bold;
-}
-
-/*? ======= Header ======= ?*/
-
-/* header {
-  position: fixed;
-  width: 100%;
-  background-color: var(--nav-color);
-  box-shadow: 0 7px 10px rgba(0, 0, 0, 0.3);
-}
-
-
-li {
-  list-style: none;
-}
-
-header a {
-  text-decoration: none;
-  color: black;
-  padding: 1.25rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background-color 0.3s;
-} */

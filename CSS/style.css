@@ -15,6 +15,7 @@
   --search-text: #010718;
   --search-bar: #f2f2f2;
   --end-of-results: #121212;
+  --top-news-section: #8ecae6;
 }
 
 /*? Color: Dark Mode ?*/
@@ -28,6 +29,7 @@ body.dark-mode {
   --search-text: #fff;
   --search-bar: #121212;
   --end-of-results: #f2f2f2;
+  --top-news-section: #023047;
 }
 
 /**========== Global reset ==========**/
@@ -61,6 +63,100 @@ body {
   margin: auto;
 }
 
+/**========== Footer Section ==========**/
+
+.footer {
+  background-color: var(--header-footer-bg);
+  color: var(--header-footer-text);
+  padding: 40px 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--text-highlight-color);
+}
+
+.footer-section p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: var(--header-footer-text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: var(--text-highlight-color);
+}
+
+.newsletter input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.newsletter button {
+  padding: 10px 20px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter button:hover {
+  background-color: var(--button-hover-bg);
+}
+
+.social-links a {
+  font-size: 1.5rem;
+  margin-right: 10px;
+  color: var(--header-footer-text);
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--text-highlight-color);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.8rem;
+}
+
 /**========== Mobile Version ==========**/
 
 @media (max-width: 1090px) {
@@ -70,7 +166,7 @@ body {
     display: block !important;
   }
 
-  /*? Transforms the Nav Category into Sidebar & invisible by-default ?*/
+  /*? Transforms the Nav Category into Sidebar & invisible by-default when not active ?*/
 
   .category-nav {
     position: fixed;
@@ -80,9 +176,9 @@ body {
     top: 0;
     padding: 20px;
     display: flex;
-    direction: column;
+    flex-direction: column;
     background-color: var(--side-nav);
-    z-index: 100;
+    z-index: 999;
     transition: all 0.4s ease;
   }
 
@@ -101,12 +197,12 @@ body {
 
   /*? Sidebar Logo & Close Icon ?*/
 
-  .category-nav .logo-toggle {
+  nav .category-nav .logo-toggle {
     display: block !important;
     width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-self: start;
+    justify-self: space-between;
   }
 
   /*? Close Icon ?*/

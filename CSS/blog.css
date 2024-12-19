@@ -3,15 +3,12 @@
 /*? Article Container ?*/
 
 #search-result,
-#top-news,
-#local-news,
 #business-news,
 #technology-news,
 #entertainment-news,
 #health-news,
 #sports-news,
-#science-news,
-#blog-container {
+#science-news {
   color: var(--blog-text-color);
   padding: 3.5rem 0;
   display: flex;
@@ -23,6 +20,8 @@
 /*? Article Cards ?*/
 
 .blog-card {
+  /*! change the background color & border */
+  background-color: var(--body-color);
   width: 400px;
   border: 1px solid #2d4c50;
   border-radius: 10px;
@@ -69,6 +68,7 @@
 /*? Article Cards: Description (Truncated) ?*/
 
 .blog-card p {
+  color: var(--blog-text-color);
   font-size: 1.2rem;
   font-family: "Roboto", sans-serif;
   padding-top: 0.2rem;

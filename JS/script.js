@@ -17,6 +17,7 @@ const modeToggle = document.querySelector(".dark-light");
 const searchToggle = document.querySelector(".searchToggle");
 const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
+/* const scrollContainers = document.querySelectorAll(".article-width"); */
 
 //~========== Top News ==========~//
 
@@ -24,12 +25,12 @@ const sidebarClose = document.querySelector(".sidebarClose");
 
 async function fetchTopNews() {
   try {
-    const apiUrl = `${BASE_URL}/top-headlines?country=us&pageSize=4&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/top-headlines?country=us&pageSize=20&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
   } catch (error) {
-    console.error("Error fetching top news", error);
+    console.error("Error fetching Top news", error);
     return [];
   }
 }
@@ -84,7 +85,7 @@ function displayTopNews(articles) {
 
 async function fetchLocalNews() {
   try {
-    const apiUrl = `${BASE_URL}/everything?q=assam&searchIn=title&pageSize=5&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=assam&searchIn=title&pageSize=20&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
@@ -142,7 +143,7 @@ function displayLocalNews(articles) {
 
 async function fetchRandomNews() {
   try {
-    const apiUrl = `${BASE_URL}/everything?q=india&searchIn=title&pageSize=5&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=india&searchIn=title&pageSize=20&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
@@ -195,6 +196,39 @@ function displayBlogs(articles) {
     blogContainer.appendChild(blogCard);
   });
 }
+
+//~========== Horizontal Scroll ==========~//
+
+function initializeHorizontalScroll() {
+  const scrollContainers = document.querySelectorAll(".article-width");
+
+  scrollContainers.forEach((container) => {
+    if (!container || container.children.length === 0) {
+      console.warn("No child elements found in container:", container);
+      return; // Skip if no children exist
+    }
+
+    const articles = container.children; // Get all child articles
+    const scrollAmount = 300; // Adjust based on the width of your articles
+
+    container.addEventListener("scroll", () => {
+      if (
+        container.scrollLeft + container.offsetWidth >=
+        container.scrollWidth - scrollAmount
+      ) {
+        container.appendChild(container.firstElementChild);
+        container.scrollLeft -= scrollAmount;
+      }
+
+      if (container.scrollLeft <= scrollAmount) {
+        container.prepend(container.lastElementChild);
+        container.scrollLeft += scrollAmount;
+      }
+    });
+  });
+}
+
+// Call this function after data is dynamically populated
 
 //~========== Search Handle & Redirect ==========~//
 
