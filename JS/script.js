@@ -199,15 +199,19 @@ function displayBlogs(articles) {
 
 //~========== Horizontal Scroll ==========~//
 
-function initializeHorizontalScroll() {
+const scrollContainers = document.querySelectorAll(".article-width");
+
+scrollContainers.forEach((scrollContainer) => {
+  scrollContainer.addEventListener("wheel", (evt) => {
+    evt.preventDefault(); // Prevent default vertical scroll
+    scrollContainer.scrollLeft += evt.deltaY; // Scroll horizontally
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
   const scrollContainers = document.querySelectorAll(".article-width");
 
   scrollContainers.forEach((container) => {
-    if (!container || container.children.length === 0) {
-      console.warn("No child elements found in container:", container);
-      return; // Skip if no children exist
-    }
-
     const articles = container.children; // Get all child articles
     const scrollAmount = 300; // Adjust based on the width of your articles
 
@@ -226,7 +230,7 @@ function initializeHorizontalScroll() {
       }
     });
   });
-}
+});
 
 // Call this function after data is dynamically populated
 
