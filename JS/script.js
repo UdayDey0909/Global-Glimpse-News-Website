@@ -199,22 +199,19 @@ function displayBlogs(articles) {
 
 //~========== Horizontal Scroll ==========~//
 
-const scrollContainers = document.querySelectorAll(".article-width");
-
-scrollContainers.forEach((scrollContainer) => {
-  scrollContainer.addEventListener("wheel", (evt) => {
-    evt.preventDefault(); // Prevent default vertical scroll
-    scrollContainer.scrollLeft += evt.deltaY; // Scroll horizontally
-  });
-});
-
 document.addEventListener("DOMContentLoaded", () => {
   const scrollContainers = document.querySelectorAll(".article-width");
 
   scrollContainers.forEach((container) => {
-    const articles = container.children; // Get all child articles
     const scrollAmount = 300; // Adjust based on the width of your articles
 
+    // Horizontal scrolling using mouse wheel
+    container.addEventListener("wheel", (evt) => {
+      evt.preventDefault();
+      container.scrollLeft += evt.deltaY;
+    });
+
+    // Loop articles on scroll
     container.addEventListener("scroll", () => {
       if (
         container.scrollLeft + container.offsetWidth >=
