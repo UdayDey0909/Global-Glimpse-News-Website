@@ -1,6 +1,6 @@
 /**========== Google Font Import - Poppins & Roboto ==========**/
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400&display=swap");
 
 /**========== Colors ==========**/
 
@@ -47,6 +47,10 @@ body {
   height: 100vh;
   background: var(--body-color);
   color: var(--blog-text-color);
+  /*! add scroll dimension */
+  /*   scrollbar-width: thin;
+  scrollbar-color: #777 #555;
+ */
 }
 
 /*? Body & Nav Margin ?*/

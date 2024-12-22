@@ -1,3 +1,85 @@
+/**========== Hero Section ==========**/
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  padding: 0 5%;
+  background: url("../Public/heroSection.jpeg") no-repeat center center;
+  background-size: cover;
+}
+
+.hero-content {
+  max-width: 50%;
+  color: #000;
+  text-align: left;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-family: "Poppins", "Helvetica Neue";
+}
+
+.hero p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-family: "Roboto", "Helvetica Neue";
+}
+
+.hero-cta {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hero .start-btn {
+  background-color: #ffa500;
+  color: #fff;
+  padding: 0.9rem 1.7rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.hero .start-btn:hover {
+  transform: scale(1.05);
+}
+
+.stats {
+  display: flex;
+  gap: 2rem;
+  font-size: 1rem;
+}
+
+.stats p {
+  margin: 0;
+  color: #000;
+}
+
+.stats span {
+  font-weight: 600;
+  color: #ffa500;
+}
+
+.hero-content .informed,
+.hero-content .empowered {
+  background: rgb(255, 165, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 165, 0, 1) 22%,
+    rgba(208, 217, 85, 1) 89%
+  );
+  color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
 /**========== Universal Section ==========**/
 
 .article-width::-webkit-scrollbar {
