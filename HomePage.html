@@ -4,15 +4,22 @@
     <meta charset="UTF-8" />
     <meta
       name="description"
-      content="Stay Updated with the latest news on Sports, health, politics, and entertainment."
+      content="Stay Updated with the latest news on Business, Entertainment, Technology, Health, Sports & Science only on Global Glimpse."
     />
+
     <title>Global Glimpse</title>
+
+    <!--~~~~~~~~~~ Website Icon ~~~~~~~~~~-->
     <link rel="icon" href="Public/icon.png" type="'image/x-icon'" />
+
+    <!--~~~~~~~~~~ CSS ~~~~~~~~~~-->
+
+    <link rel="stylesheet" href="CSS/HomePage.css" />
     <link rel="stylesheet" href="CSS/style.css" />
     <link rel="stylesheet" href="CSS/nav.css" />
     <link rel="stylesheet" href="CSS/blog.css" />
-    <!--     <link rel="stylesheet" href="CSS/dark-mode.css" /> -->
 
+    <!--~~~~~~~~~~ BOXICONS CSS for Icons ~~~~~~~~~~-->
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -20,8 +27,10 @@
   </head>
 
   <body>
-    <header>
+    <header class="obj-width">
+      <!--~~~~~~~~~~ Navigation Section ~~~~~~~~~~-->
       <nav>
+        <!--? Sidebar Menu ?-->
         <div class="navbar">
           <i class="bx bx-menu sidebarOpen"></i>
           <span class="logo navLogo"
@@ -35,6 +44,8 @@
               >
               <i class="bx bx-x sidebarClose"></i>
             </div>
+
+            <!--~~~~~~~~~~ Category Section ~~~~~~~~~~-->
             <ul class="nav-links">
               <li>
                 <a href="Business.html" data-category="business">Business</a>
@@ -61,6 +72,7 @@
             </ul>
           </div>
 
+          <!--~~~~~~~~~~ Dark/Light Mode & Search Box Icons ~~~~~~~~~~-->
           <div class="darkLight-searchBox">
             <div class="dark-light">
               <i class="bx bx-moon moon"></i>
@@ -85,29 +97,129 @@
           </div>
         </div>
       </nav>
-
-      <section id="">
-        <article id="search-result"></article>
-      </section>
     </header>
-
-    <main class="article-width">
-      <section id="">
-        <h1>Top News</h1>
-        <article id="top-news"></article>
+    <!--~~~~~~~~~~ Hero Section ~~~~~~~~~~-->
+    <main class="obj-width">
+      <section id="top-section"></section>
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Stay <span class="informed">Informed</span>, Stay <span class="empowered">Empowered</span> </h1>
+          <p>
+            Your daily dose of global news, empowering stories, and </br> insights to
+            help you stay ahead in a rapidly changing world.
+          </p>
+          <div class="hero-cta">
+            <a href="#" class="start-btn">Read Now</a>
+            <div class="stats">
+              <p><span>500+</span> Articles </br> Published Today</p>
+              <p><span>99%</span> Trusted </br> Sources</p>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section id="">
-        <h1>For You</h1>
-        <article id="local-news"></article>
+    <!--~~~~~~~~~~ Main Content Section ~~~~~~~~~~-->
+      <!--? Dynamic Top News Cards Display ?-->
+
+      <section id="top-section"></section>
+
+      <section class="top-news-section">
+        <div class="section-header">
+          <h2>
+            <span class="latest">TOP</span> <span class="news">News</span>
+          </h2>
+          <button class="more-news-button">More News +</button>
+        </div>
+        <article class="article-width" id="top-news"></article>
       </section>
 
-      <section id="latestRelease">
-        <h1>Latest Releases</h1>
-        <article id="blog-container"></article>
+      <!--? Dynamic Local News Cards Display ?-->
+
+      <section id="top-section"></section>
+
+      <section class="top-news-section">
+        <div class="section-header">
+          <h2><span class="latest">For</span> <span class="news">You</span></h2>
+          <button class="more-news-button">More News +</button>
+        </div>
+        <article class="article-width" id="local-news"></article>
+      </section>
+
+      <!--? Dynamic Random India News Cards Display ?-->
+
+      <section id="top-section"></section>
+
+      <section class="top-news-section">
+        <div class="section-header">
+          <h2>
+            <span class="latest">Latest</span> <span class="news">News</span>
+          </h2>
+          <button class="more-news-button">More News +</button>
+        </div>
+        <article class="article-width" id="blog-container"></article>
       </section>
     </main>
 
+    <!--~~~~~~~~~~ Footer Section ~~~~~~~~~~-->
+
+    <footer class="footer">
+      <div class="footer-container">
+        <!--? About Section ?-->
+        <div class="footer-section about">
+          <h3>About Global Glimpse</h3>
+          <p>
+            Global Glimpse is your one-stop destination for the latest news in
+            Business, Entertainment, Technology, Health, Sports, and Science.
+            Stay informed and connected with the world.
+          </p>
+        </div>
+
+        <!--? Quick Links Section ?-->
+        <div class="footer-section links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="Business.html">Business</a></li>
+            <li><a href="Entertainment.html">Entertainment</a></li>
+            <li><a href="Technology.html">Technology</a></li>
+            <li><a href="Health.html">Health</a></li>
+            <li><a href="Sports.html">Sports</a></li>
+            <li><a href="Science.html">Science</a></li>
+          </ul>
+        </div>
+
+        <!--? Newsletter Subscription Section ?-->
+        <div class="footer-section newsletter">
+          <h3>Subscribe to Our Newsletter</h3>
+          <form id="newsletter-form">
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
+            <button type="submit">Subscribe</button>
+          </form>
+          <p>Stay updated with the latest news delivered to your inbox.</p>
+        </div>
+
+        <!--? Social Media Links Section ?-->
+        <div class="footer-section social">
+          <h3>Follow Us</h3>
+          <div class="social-links">
+            <a href="#" target="_blank"><i class="bx bxl-facebook"></i></a>
+            <a href="#" target="_blank"><i class="bx bxl-twitter"></i></a>
+            <a href="#" target="_blank"><i class="bx bxl-instagram"></i></a>
+            <a href="#" target="_blank"><i class="bx bxl-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Global Glimpse. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!--~~~~~~~~~~ JavaScript Files ~~~~~~~~~~-->
     <script src="JS/config.js"></script>
     <script src="JS/script.js"></script>
   </body>

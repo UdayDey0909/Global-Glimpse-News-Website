@@ -1,8 +1,11 @@
-/**======= Google Font Import - Poppins & Roboto =======**/
+/**========== Google Font Import - Poppins & Roboto ==========**/
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400&display=swap");
 
-/**======= Colors =======**/
+/**========== Colors ==========**/
+
+/*? Color: Light Mode ?*/
+
 :root {
   --body-color: #edf6f9;
   --nav-color: #2d4c50;
@@ -11,7 +14,11 @@
   --side-nav: #010718;
   --search-text: #010718;
   --search-bar: #f2f2f2;
+  --end-of-results: #121212;
+  --top-news-section: #8ecae6;
 }
+
+/*? Color: Dark Mode ?*/
 
 body.dark-mode {
   --body-color: #121212;
@@ -21,9 +28,11 @@ body.dark-mode {
   --side-nav: #242526;
   --search-text: #fff;
   --search-bar: #121212;
+  --end-of-results: #f2f2f2;
+  --top-news-section: #023047;
 }
 
-/**======= Global reset =======**/
+/**========== Global reset ==========**/
 
 * {
   margin: 0;
@@ -32,30 +41,136 @@ body.dark-mode {
   font-family: "Poppins", sans-serif;
 }
 
-/**======= Base Style =======**/
+/**========== Base Style & Margin ==========**/
 
 body {
   height: 100vh;
   background: var(--body-color);
   color: var(--blog-text-color);
+  /*! add scroll dimension */
+  /*   scrollbar-width: thin;
+  scrollbar-color: #777 #555;
+ */
 }
+
+/*? Body & Nav Margin ?*/
 
 .obj-width {
   max-width: 1600px;
   margin: auto;
 }
 
+/*? Article Container Margin ?*/
+
 .article-width {
   max-width: 1400px;
   margin: auto;
 }
 
-/**======= Mobile Version =======**/
+/**========== Footer Section ==========**/
+
+.footer {
+  background-color: var(--header-footer-bg);
+  color: var(--header-footer-text);
+  padding: 40px 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--text-highlight-color);
+}
+
+.footer-section p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: var(--header-footer-text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: var(--text-highlight-color);
+}
+
+.newsletter input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.newsletter button {
+  padding: 10px 20px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter button:hover {
+  background-color: var(--button-hover-bg);
+}
+
+.social-links a {
+  font-size: 1.5rem;
+  margin-right: 10px;
+  color: var(--header-footer-text);
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--text-highlight-color);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.8rem;
+}
+
+/**========== Mobile Version ==========**/
 
 @media (max-width: 1090px) {
+  /*? Menu Icon ?*/
+
   nav .navbar .sidebarOpen {
     display: block !important;
   }
+
+  /*? Transforms the Nav Category into Sidebar & invisible by-default when not active ?*/
 
   .category-nav {
     position: fixed;
@@ -65,34 +180,44 @@ body {
     top: 0;
     padding: 20px;
     display: flex;
-    direction: row;
+    flex-direction: column;
     background-color: var(--side-nav);
-    z-index: 100;
+    z-index: 999;
     transition: all 0.4s ease;
   }
+
+  /*? Makes the Sidebar Visible ?*/
 
   nav.active .category-nav {
     left: 0;
   }
+
+  /*? Hide Main Logo when sidebar active  ?*/
 
   nav.active .navbar .navLogo a {
     opacity: 0;
     transition: opacity 0.3s ease;
   }
 
-  .category-nav .logo-toggle {
+  /*? Sidebar Logo & Close Icon ?*/
+
+  nav .category-nav .logo-toggle {
     display: block !important;
     width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-self: start;
+    justify-self: space-between;
   }
+
+  /*? Close Icon ?*/
 
   .logo-toggle .sidebarClose {
     color: var(--text-color);
     font-size: 24px;
     cursor: pointer;
   }
+
+  /*? Category ?*/
 
   .navbar .nav-links {
     flex-direction: column;
@@ -104,6 +229,14 @@ body {
     margin-top: 30px;
   }
 
+  /*? Article Cards ?*/
+
+  .blog-card {
+    width: 100%;
+  }
+
+  /*! invalid || need correction */
+
   .search-container {
     flex-direction: column;
     align-items: stretch;
@@ -112,9 +245,5 @@ body {
 
   #search-input {
     width: 150px;
-  }
-
-  .blog-card {
-    width: 100%;
   }
 }
