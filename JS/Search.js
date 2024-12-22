@@ -45,7 +45,7 @@ async function fetchNewsQuery(query) {
   try {
     const apiUrl = `${BASE_URL}/everything?q=${encodeURIComponent(
       query
-    )}&searchIn=title,description&pageSize=10&apikey=${apikey}`;
+    )}&searchIn=title,description&language=en&pageSize=10&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
 

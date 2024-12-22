@@ -67,10 +67,40 @@ body {
   margin: auto;
 }
 
+/* Scroll to Top Button Styles */
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.scroll-to-top:hover {
+  background-color: #0056b3;
+}
+
+/* Style the Boxicons Icon */
+.scroll-to-top i {
+  font-size: 24px; /* Adjust icon size */
+  line-height: 1;
+}
+
 /**========== Footer Section ==========**/
 
 .footer {
-  background-color: var(--header-footer-bg);
+  background-color: papayawhip;
   color: var(--header-footer-text);
   padding: 40px 20px;
   font-family: "Poppins", sans-serif;

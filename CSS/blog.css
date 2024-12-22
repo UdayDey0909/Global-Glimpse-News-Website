@@ -8,7 +8,8 @@
 #entertainment-news,
 #health-news,
 #sports-news,
-#science-news {
+#science-news,
+#topNews {
   color: var(--blog-text-color);
   padding: 3.5rem 0;
   display: flex;
