@@ -17,7 +17,7 @@ const modeToggle = document.querySelector(".dark-light");
 const searchToggle = document.querySelector(".searchToggle");
 const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
-/* const scrollContainers = document.querySelectorAll(".article-width"); */
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
 //~========== Top News ==========~//
 
@@ -197,21 +197,36 @@ function displayBlogs(articles) {
   });
 }
 
-//~========== Horizontal Scroll ==========~//
+//~========== Hero Section Button Smooth Scrolling ==========~//
+
+document
+  .querySelector(".start-btn")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    document
+      .querySelector("#hero-section-ref")
+      .scrollIntoView({ behavior: "smooth" });
+  });
+
+//~========== Horizontal Scroll & Infinite Loop ==========~//
 
 document.addEventListener("DOMContentLoaded", () => {
   const scrollContainers = document.querySelectorAll(".article-width");
 
-  scrollContainers.forEach((container) => {
-    const scrollAmount = 300; // Adjust based on the width of your articles
+  //? Amount of Scroll
 
-    // Horizontal scrolling using mouse wheel
+  scrollContainers.forEach((container) => {
+    const scrollAmount = 200;
+
+    //? Horizontal Scrolling
+
     container.addEventListener("wheel", (evt) => {
       evt.preventDefault();
       container.scrollLeft += evt.deltaY;
     });
 
-    // Loop articles on scroll
+    //? Loop articles on scroll
+
     container.addEventListener("scroll", () => {
       if (
         container.scrollLeft + container.offsetWidth >=
@@ -229,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Call this function after data is dynamically populated
+//! Call this function after data is dynamically populated
 
 //~========== Search Handle & Redirect ==========~//
 
@@ -291,4 +306,25 @@ body.addEventListener("click", (e) => {
   ) {
     nav.classList.remove("active");
   }
+});
+
+//~========== SideBar Toggle for Smaller Devices ==========~//
+
+//? Show or hide the button based on scroll position
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 200) {
+    //? Show the button after scrolling down 200px
+    scrollToTopBtn.style.display = "flex";
+  } else {
+    scrollToTopBtn.style.display = "none";
+  }
+});
+
+//? Scroll smoothly to the top when the button is clicked
+scrollToTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 });
