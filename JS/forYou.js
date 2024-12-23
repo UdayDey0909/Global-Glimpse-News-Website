@@ -2,7 +2,7 @@ const { apikey, BASE_URL } = window.config;
 
 //~========== DOM Elements ==========~//
 
-const topNews = document.getElementById("topNews");
+const localNews = document.getElementById("localNews");
 const searchField = document.getElementById("search-field");
 const searchButton = document.getElementById("search-button");
 const scrollAnchor = document.querySelector("#scroll-anchor");
@@ -13,16 +13,16 @@ const searchToggle = document.querySelector(".searchToggle");
 const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
 
-//~========== Fetch and Display top News ==========~//
+//~========== Fetch and Display Local News ==========~//
 
 let page = 1;
 let isFetching = false;
 
 //? API URL
 
-async function fetchTopNews() {
+async function fetchLocalNews() {
   try {
-    const apiUrl = `${BASE_URL}/top-headlines?country=us&page=${page}&pageSize=8&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=assam&searchIn=title&page=${page}&pageSize=8&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
 
@@ -31,19 +31,19 @@ async function fetchTopNews() {
     const totalResults = data.totalResults || 0;
     const totalResultsElement = document.getElementById("total-results");
     if (totalResultsElement) {
-      totalResultsElement.textContent = `Total Top News Articles: ${totalResults}`;
+      totalResultsElement.textContent = `Total Local Articles: ${totalResults}`;
     }
 
     return data.articles;
   } catch (error) {
-    console.error("Error fetching Top news", error);
+    console.error("Error fetching Local news", error);
     return [];
   }
 }
 
 //? Remove Corrupt Cards
 
-function displayTopNews(articles) {
+function displayLocalNews(articles) {
   articles.forEach((article) => {
     const blogCard = document.createElement("div");
     blogCard.classList.add("blog-card");
@@ -60,7 +60,7 @@ function displayTopNews(articles) {
     description.textContent = article.description;
     if (!article.description) return;
 
-    //? Create Top News Cards
+    //? Create Local News Cards
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
@@ -71,22 +71,22 @@ function displayTopNews(articles) {
 
     //? Check if scrollAnchor exists for infinite scrolling
 
-    if (scrollAnchor && topNews.contains(scrollAnchor)) {
-      topNews.insertBefore(blogCard, scrollAnchor);
+    if (scrollAnchor && localNews.contains(scrollAnchor)) {
+      localNews.insertBefore(blogCard, scrollAnchor);
     } else {
-      topNews.appendChild(blogCard);
+      localNews.appendChild(blogCard);
     }
   });
 }
 
-//? Fetch & Display Top News Cards
+//? Fetch & Display Local News Cards
 
 (async () => {
   try {
-    const articles = await fetchTopNews();
-    displayTopNews(articles);
+    const articles = await fetchLocalNews();
+    displayLocalNews(articles);
   } catch (error) {
-    console.error("Error fetching Top News:", error);
+    console.error("Error fetching Local News:", error);
   }
 })();
 
@@ -99,12 +99,12 @@ const observer = new IntersectionObserver(
       isFetching = true;
       page++;
 
-      const articles = await fetchTopNews();
+      const articles = await fetchLocalNews();
 
       //? End of the results
 
       if (articles.length > 0) {
-        displayTopNews(articles);
+        displayLocalNews(articles);
       } else {
         if (endOfResultsMessage) {
           endOfResultsMessage.style.display = "block";
@@ -127,27 +127,6 @@ const observer = new IntersectionObserver(
 if (scrollAnchor) {
   observer.observe(scrollAnchor);
 }
-
-// Select the scroll-to-top button
-const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-
-// Show or hide the button based on scroll position
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 200) {
-    // Show the button after scrolling down 200px
-    scrollToTopBtn.style.display = "flex";
-  } else {
-    scrollToTopBtn.style.display = "none";
-  }
-});
-
-// Scroll smoothly to the top when the button is clicked
-scrollToTopBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-});
 
 //~========== Search Handle & Redirect ==========~//
 

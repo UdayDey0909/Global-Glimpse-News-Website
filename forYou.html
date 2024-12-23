@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Stay Updated with the latest Local news on Global Glimpse."
+    />
+
+    <title>Global Glimpse</title>
+
+    <!--~~~~~~~~~~ Website Icon ~~~~~~~~~~-->
+    <link rel="icon" href="Public/icon.png" type="'image/x-icon'" />
+
+    <!--~~~~~~~~~~ CSS ~~~~~~~~~~-->
+    <link rel="stylesheet" href="CSS/style.css" />
+    <link rel="stylesheet" href="CSS/nav.css" />
+    <link rel="stylesheet" href="CSS/blog.css" />
+
+    <!--~~~~~~~~~~ BOXICONS CSS for Icons ~~~~~~~~~~-->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header class="obj-width">
+      <!--~~~~~~~~~~ Navigation Section ~~~~~~~~~~-->
+      <nav>
+        <!--? Sidebar Menu ?-->
+        <div class="navbar">
+          <i class="bx bx-menu sidebarOpen"></i>
+          <span class="logo navLogo"
+            ><a href="HomePage.html">Global Glimpse</a></span
+          >
+
+          <div class="category-nav">
+            <div class="logo-toggle">
+              <span class="logo categoryLogo"
+                ><a href="HomePage.html">GlobalGlimpse</a></span
+              >
+              <i class="bx bx-x sidebarClose"></i>
+            </div>
+
+            <!--~~~~~~~~~~ Category Section ~~~~~~~~~~-->
+            <ul class="nav-links">
+              <li>
+                <a href="Business.html" data-category="business">Business</a>
+              </li>
+              <li>
+                <a href="Entertainment.html" data-category="entertainment"
+                  >Entertainment</a
+                >
+              </li>
+              <li>
+                <a href="Technology.html" data-category="technology"
+                  >Technology</a
+                >
+              </li>
+              <li>
+                <a href="Health.html" data-category="health">Health</a>
+              </li>
+              <li>
+                <a href="Sports.html" data-category="sports">Sports</a>
+              </li>
+              <li>
+                <a href="Science.html" data-category="science">Science</a>
+              </li>
+            </ul>
+          </div>
+
+          <!--~~~~~~~~~~ Dark/Light Mode & Search Box Icons ~~~~~~~~~~-->
+          <div class="darkLight-searchBox">
+            <div class="dark-light">
+              <i class="bx bx-moon moon"></i>
+              <i class="bx bx-sun sun"></i>
+            </div>
+
+            <div class="searchBox">
+              <div class="searchToggle">
+                <i class="bx bx-x cancel"></i>
+                <i class="bx bx-search search"></i>
+              </div>
+
+              <div class="search-field">
+                <input
+                  type="text"
+                  id="search-field"
+                  placeholder="Search News Here..."
+                />
+                <i class="bx bx-search" id="search-button"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!--~~~~~~~~~~ Main Content Section ~~~~~~~~~~-->
+    <main class="article-width">
+      <section id="top-section">
+        <!--? Display Total Results ?-->
+        <div id="total-results"></div>
+
+        <!--? Dynamic News Cards Display ?-->
+        <div id="localNews"></div>
+
+        <!--? Scroll Anchor for Infinite Scrolling ?-->
+        <div id="scroll-anchor"></div>
+
+        <!--? End of Results Message ?-->
+        <div id="end-of-results">
+          <p>You have reached the end of the results.</p>
+        </div>
+      </section>
+    </main>
+
+    <!--~~~~~~~~~~ JavaScript Files ~~~~~~~~~~-->
+    <script src="JS/config.js"></script>
+    <script src="JS/forYou.js"></script>
+  </body>
+</html>

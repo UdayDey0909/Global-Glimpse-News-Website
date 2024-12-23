@@ -92,14 +92,6 @@
   padding-top: 4.3rem;
 }
 
-/**========== Top News Section ==========**/
-
-.top-news-section {
-  font-family: "Poppins", "Roboto", sans-serif;
-  background-color: var(--top-news-section);
-  padding: 20px;
-}
-
 .section-header {
   display: flex;
   justify-content: space-between;
@@ -111,7 +103,27 @@
   font-size: 2.5rem;
 }
 
-.section-header .latest {
+/*! Add universal box shadow color or color for dark mode */
+
+.more-news-button {
+  color: var(--blog-text-color);
+  background: var(--body-color);
+  border: none;
+  padding: 10px 15px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/**========== Top News Section ==========**/
+
+.top-news-section {
+  font-family: "Poppins", "Roboto", sans-serif;
+  background-color: var(--top-news-section);
+  padding: 20px;
+}
+
+.section-header .top {
   font-weight: bold;
   color: var(--blog-text-color);
 }
@@ -121,18 +133,6 @@
 .section-header .news {
   font-weight: bold;
   color: #ff0;
-}
-
-/*! Add universal box shadow color or color for dark mode */
-
-.more-news-button {
-  color: var(--blog-text-color);
-  background: var(--body-color);
-  border: none;
-  padding: 10px 15px;
-  font-size: 1rem;
-  cursor: pointer;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #top-news {
@@ -147,6 +147,24 @@
 
 /**========== For You Section ==========**/
 
+.local-news-section {
+  font-family: "Poppins", "Roboto", sans-serif;
+  background-color: var(--top-news-section);
+  padding: 20px;
+}
+
+.section-header .for {
+  font-weight: bold;
+  color: var(--blog-text-color);
+}
+
+/*! Change color contrast bad */
+
+.section-header .you {
+  font-weight: bold;
+  color: #ff0;
+}
+
 #local-news {
   max-width: 1400px;
   display: flex;
@@ -158,6 +176,24 @@
 }
 
 /**========== Random India News Section ==========**/
+
+.latest-news-section {
+  font-family: "Poppins", "Roboto", sans-serif;
+  background-color: var(--top-news-section);
+  padding: 20px;
+}
+
+.section-header .latest {
+  font-weight: bold;
+  color: var(--blog-text-color);
+}
+
+/*! Change color contrast bad */
+
+.latest-news-section .section-header .news {
+  font-weight: bold;
+  color: #ff0;
+}
 
 #blog-container {
   max-width: 1400px;
