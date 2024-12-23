@@ -86,29 +86,33 @@ nav .navbar .sidebarOpen {
 
 .nav-links li a {
   position: relative;
-  font-size: 17px;
-  font-weight: 400;
-  color: var(--text-color);
   text-decoration: none;
+  color: #fff;
   padding: 10px;
 }
 
-.nav-links li a::before {
+.nav-links li a::before,
+.nav-links li a::after {
   content: "";
   position: absolute;
-  left: 50%;
   bottom: 0;
-  transform: translateX(-50%);
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--text-color);
-  opacity: 0;
-  transition: all 0.3s ease;
+  width: 0;
+  height: 2px;
+  background-color: #fff;
+  transition: width 0.3s ease;
 }
 
-.nav-links li:hover a::before {
-  opacity: 1;
+.nav-links li a::before {
+  left: 0;
+}
+
+.nav-links li a::after {
+  right: 0;
+}
+
+.nav-links li a:hover::before,
+.nav-links li a:hover::after {
+  width: 50%;
 }
 
 /**========== Theme & Search Section ==========**/

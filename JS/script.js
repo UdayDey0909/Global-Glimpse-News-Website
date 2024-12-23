@@ -5,7 +5,7 @@ const { apikey, BASE_URL } = window.config;
 const newsQuery = document.getElementById("search-result");
 const topNews = document.getElementById("top-news");
 const localNews = document.getElementById("local-news");
-const blogContainer = document.getElementById("blog-container");
+const latestNews = document.getElementById("latest-news");
 const searchField = document.getElementById("search-field");
 const searchButton = document.getElementById("search-button");
 
@@ -19,13 +19,13 @@ const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
 const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
-//~========== Top News ==========~//
+//~========== Top News in India ==========~//
 
 //? API URL
 
 async function fetchTopNews() {
   try {
-    const apiUrl = `${BASE_URL}/top-headlines?country=us&pageSize=20&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=India&searchIn=title&pageSize=20&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
@@ -79,7 +79,7 @@ function displayTopNews(articles) {
   });
 }
 
-//~========== Local News ==========~//
+//~========== Local News in Assam ==========~//
 
 //? API URL
 
@@ -139,35 +139,35 @@ function displayLocalNews(articles) {
   });
 }
 
-//~========== Random News in India ==========~//
+//~========== Latest News in World ==========~//
 
-async function fetchRandomNews() {
+async function fetchLatestNews() {
   try {
-    const apiUrl = `${BASE_URL}/everything?q=india&searchIn=title&pageSize=20&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=Latest&searchIn=title&pageSize=20&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
   } catch (error) {
-    console.error("Error fetching random news", error);
+    console.error("Error fetching Latest news", error);
     return [];
   }
 }
 
-//? Fetch & Display Random India News Cards
+//? Fetch & Display Latest News Cards
 
 (async () => {
   try {
-    const articles = await fetchRandomNews();
-    displayBlogs(articles);
+    const articles = await fetchLatestNews();
+    displayLatestNews(articles);
   } catch (error) {
-    console.error("Error fetching random news:", error);
+    console.error("Error fetching Latest news:", error);
   }
 })();
 
 //? Remove Corrupt Cards
 
-function displayBlogs(articles) {
-  blogContainer.innerHTML = "";
+function displayLatestNews(articles) {
+  latestNews.innerHTML = "";
 
   articles.forEach((article) => {
     const blogCard = document.createElement("div");
@@ -185,7 +185,7 @@ function displayBlogs(articles) {
     description.textContent = article.description;
     if (!article.description) return;
 
-    //? Create Random India News Cards
+    //? Create Latest News Cards
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
@@ -193,7 +193,7 @@ function displayBlogs(articles) {
     blogCard.addEventListener("click", () => {
       window.open(article.url, "_blank");
     });
-    blogContainer.appendChild(blogCard);
+    latestNews.appendChild(blogCard);
   });
 }
 

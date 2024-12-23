@@ -10,7 +10,8 @@
 #sports-news,
 #science-news,
 #topNews,
-#localNews {
+#localNews,
+#latestNews {
   color: var(--blog-text-color);
   padding: 3.5rem 0;
   display: flex;
