@@ -16,6 +16,9 @@
   --search-bar: #f2f2f2;
   --end-of-results: #121212;
   --top-news-section: #8ecae6;
+  --footer-bg-color: papayawhip;
+  --footer-text-color: #001219;
+  --link-color: #145680;
 }
 
 /*? Color: Dark Mode ?*/
@@ -29,7 +32,10 @@ body.dark-mode {
   --search-text: #fff;
   --search-bar: #121212;
   --end-of-results: #f2f2f2;
-  --top-news-section: #023047;
+  --top-news-section: #264653;
+  --footer-bg-color: #023047;
+  --footer-text-color: #fefae0;
+  --link-color: #ffa500;
 }
 
 /**========== Global reset ==========**/
@@ -100,8 +106,8 @@ body {
 /**========== Footer Section ==========**/
 
 .footer {
-  background-color: papayawhip;
-  color: var(--header-footer-text);
+  background-color: var(--footer-bg-color);
+  color: var(--footer-text-color);
   padding: 40px 20px;
   font-family: "Poppins", sans-serif;
 }
@@ -123,12 +129,12 @@ body {
 .footer-section h3 {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: var(--text-highlight-color);
 }
 
 .footer-section p {
   font-size: 0.9rem;
   line-height: 1.5;
+  font-family: "Roboto", "Helvetica Neue";
 }
 
 .footer-section ul {
@@ -141,13 +147,14 @@ body {
 }
 
 .footer-section ul li a {
-  color: var(--header-footer-text);
+  color: var(--footer-text-color);
   text-decoration: none;
   transition: color 0.3s ease;
+  font-family: "Roboto", "Helvetica Neue";
 }
 
 .footer-section ul li a:hover {
-  color: var(--text-highlight-color);
+  color: var(--search-text);
 }
 
 .newsletter input[type="email"] {
@@ -162,27 +169,33 @@ body {
 .newsletter button {
   padding: 10px 20px;
   background-color: #ffa500;
-  color: var(--button-text);
+  color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .newsletter button:hover {
-  background-color: var(--button-hover-bg);
+  transform: scale(1.05);
 }
 
 .social-links a {
   font-size: 1.5rem;
   margin-right: 10px;
-  color: var(--header-footer-text);
+  color: var(--footer-text-color);
   transition: color 0.3s ease;
+  text-decoration: none;
 }
 
 .social-links a:hover {
-  color: var(--text-highlight-color);
+  color: var(--search-text);
+}
+
+.social-connects a {
+  text-decoration: none;
+  color: var(--link-color);
 }
 
 .footer-bottom {
@@ -197,7 +210,7 @@ body {
 }
 
 .footer-legal a {
-  color: var(--blog-text-color);
+  color: var(--link-color);
   text-decoration: none;
 }
 
