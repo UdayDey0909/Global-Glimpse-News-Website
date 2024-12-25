@@ -85,9 +85,11 @@ nav .navbar .sidebarOpen {
 }
 
 .nav-links li a {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text-color);
   position: relative;
   text-decoration: none;
-  color: #fff;
   padding: 10px;
 }
 

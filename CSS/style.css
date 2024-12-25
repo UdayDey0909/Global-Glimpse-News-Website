@@ -161,7 +161,7 @@ body {
 
 .newsletter button {
   padding: 10px 20px;
-  background-color: var(--button-bg);
+  background-color: #ffa500;
   color: var(--button-text);
   border: none;
   border-radius: 5px;
@@ -190,7 +190,20 @@ body {
   margin-top: 20px;
   font-size: 0.8rem;
 }
+.footer .footer-legal {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.8rem;
+}
 
+.footer-legal a {
+  color: var(--blog-text-color);
+  text-decoration: none;
+}
+
+.footer-section.links {
+  justify-items: center;
+}
 /**========== Mobile Version ==========**/
 
 @media (max-width: 1090px) {
