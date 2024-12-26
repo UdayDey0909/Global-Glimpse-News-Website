@@ -308,7 +308,7 @@ body.addEventListener("click", (e) => {
   }
 });
 
-//~========== SideBar Toggle for Smaller Devices ==========~//
+//~========== Scroll to Top ==========~//
 
 //? Show or hide the button based on scroll position
 
@@ -328,3 +328,29 @@ scrollToTopBtn.addEventListener("click", () => {
     behavior: "smooth",
   });
 });
+
+//~========== Newsletter Subscribe ==========~//
+
+document
+  .getElementById("newsletter-form")
+  .addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent form submission
+
+    const emailInput = this.email;
+    const feedback = document.getElementById("newsletter-feedback");
+    const emailValue = emailInput.value.trim();
+
+    if (emailValue === "") {
+      feedback.textContent = ""; // Clear feedback if input is empty
+      return;
+    }
+
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+      feedback.textContent = "Thank you for subscribing!";
+      feedback.style.color = "green";
+      emailInput.value = ""; // Clear input
+    } else {
+      feedback.textContent = "Please enter a valid email address.";
+      feedback.style.color = "red";
+    }
+  });
