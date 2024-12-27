@@ -250,19 +250,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //? Redirects with the search query in the URL
 
-searchButton.addEventListener("click", () => {
+//? Search Function
+function performSearch() {
   const query = searchField.value.trim();
   if (query) {
     window.location.href = `searchResult.html?query=${encodeURIComponent(
       query
     )}`;
   } else {
-    console.warn("Search query is empty");
+    alert("Please enter a search query.");
+  }
+}
+
+//? Redirects with the search query in the URL (Button and Enter Key)
+searchButton.addEventListener("click", performSearch);
+
+searchField.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    performSearch();
   }
 });
 
-//?Search Button
-
+//? Search Toggle
 searchToggle.addEventListener("click", () => {
   searchToggle.classList.toggle("active");
 });
