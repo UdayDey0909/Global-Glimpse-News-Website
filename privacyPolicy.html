@@ -10,7 +10,7 @@
     <title>Global Glimpse</title>
 
     <!--~~~~~~~~~~ Website Icon ~~~~~~~~~~-->
-    <link rel="icon" href="Public/icon.png" type="'image/x-icon'" />
+    <link rel="icon" href="Public/icon.png" type="image/x-icon" />
 
     <!--~~~~~~~~~~ CSS ~~~~~~~~~~-->
     <link rel="stylesheet" href="CSS/style.css" />
@@ -97,7 +97,7 @@
       </nav>
     </header>
     <main class="article-width">
-      <section id="top-section"></section>
+      <section class="top-section"></section>
       <br />
       <h1>Privacy Policy</h1>
       <br />
@@ -652,11 +652,7 @@
             />
             <button type="submit">Subscribe</button>
           </form>
-          <div
-            id="newsletter-feedback"
-            aria-live="polite"
-            style="margin-top: 10px"
-          ></div>
+          <div id="newsletter-feedback" style="margin-top: 10px"></div>
           <p>Stay updated with the latest news delivered to your inbox.</p>
         </div>
 
@@ -706,8 +702,6 @@
         </div>
       </div>
 
-      <div class="footer-partners"></div>
-
       <div class="footer-bottom">
         <p>&copy; 2024 Global Glimpse. All Rights Reserved.</p>
       </div>
@@ -738,19 +732,28 @@
 
       //? Redirects with the search query in the URL
 
-      searchButton.addEventListener("click", () => {
+      //? Search Function
+      function performSearch() {
         const query = searchField.value.trim();
         if (query) {
           window.location.href = `searchResult.html?query=${encodeURIComponent(
             query
           )}`;
         } else {
-          console.warn("Search query is empty");
+          alert("Please enter a search query.");
+        }
+      }
+
+      //? Redirects with the search query in the URL (Button and Enter Key)
+      searchButton.addEventListener("click", performSearch);
+
+      searchField.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+          performSearch();
         }
       });
 
-      //?Search Button
-
+      //? Search Toggle
       searchToggle.addEventListener("click", () => {
         searchToggle.classList.toggle("active");
       });

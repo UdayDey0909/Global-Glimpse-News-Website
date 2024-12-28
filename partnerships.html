@@ -2,21 +2,104 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Partnership with Global Glimpse</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta
+      name="description"
+      content="Stay Updated with the latest Business news on Global Glimpse."
+    />
+
+    <title>Global Glimpse</title>
+
+    <!--~~~~~~~~~~ Website Icon ~~~~~~~~~~-->
+    <link rel="icon" href="Public/icon.png" type="image/x-icon" />
+
+    <!--~~~~~~~~~~ CSS ~~~~~~~~~~-->
+    <link rel="stylesheet" href="CSS/style.css" />
+    <link rel="stylesheet" href="CSS/nav.css" />
+    <link rel="stylesheet" href="CSS/blog.css" />
+
+    <!--~~~~~~~~~~ BOXICONS CSS for Icons ~~~~~~~~~~-->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
-    <header>
+    <header class="obj-width">
+      <!--~~~~~~~~~~ Navigation Section ~~~~~~~~~~-->
       <nav>
-        <a href="homepage.html">Home</a>
-        <a href="partnership.html" class="active">Partnership</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+        <!--? Sidebar Menu ?-->
+        <div class="navbar">
+          <i class="bx bx-menu sidebarOpen"></i>
+          <span class="logo navLogo"
+            ><a href="HomePage.html">Global Glimpse</a></span
+          >
+
+          <div class="category-nav">
+            <div class="logo-toggle">
+              <span class="logo categoryLogo"
+                ><a href="HomePage.html">GlobalGlimpse</a></span
+              >
+              <i class="bx bx-x sidebarClose"></i>
+            </div>
+
+            <!--~~~~~~~~~~ Category Section ~~~~~~~~~~-->
+            <ul class="nav-links">
+              <li>
+                <a href="Business.html" data-category="business">Business</a>
+              </li>
+              <li>
+                <a href="Entertainment.html" data-category="entertainment"
+                  >Entertainment</a
+                >
+              </li>
+              <li>
+                <a href="Technology.html" data-category="technology"
+                  >Technology</a
+                >
+              </li>
+              <li>
+                <a href="Health.html" data-category="health">Health</a>
+              </li>
+              <li>
+                <a href="Sports.html" data-category="sports">Sports</a>
+              </li>
+              <li>
+                <a href="Science.html" data-category="science">Science</a>
+              </li>
+            </ul>
+          </div>
+
+          <!--~~~~~~~~~~ Dark/Light Mode & Search Box Icons ~~~~~~~~~~-->
+          <div class="darkLight-searchBox">
+            <div class="dark-light">
+              <i class="bx bx-moon moon"></i>
+              <i class="bx bx-sun sun"></i>
+            </div>
+
+            <div class="searchBox">
+              <div class="searchToggle">
+                <i class="bx bx-x cancel"></i>
+                <i class="bx bx-search search"></i>
+              </div>
+
+              <div class="search-field">
+                <input
+                  type="text"
+                  id="search-field"
+                  placeholder="Search News Here..."
+                />
+                <i class="bx bx-search" id="search-button"></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </nav>
     </header>
+    <main class="article-width">
+      <section class="top-section"></section>
+      <br />
 
-    <main id="partnership-section">
       <h1>Partner with Global Glimpse</h1>
       <p>
         We are always open to collaborating with organizations, businesses, and
@@ -63,12 +146,131 @@
       </form>
 
       <p id="form-message"></p>
+
+      <br /><br />
     </main>
 
-    <footer>
-      <p>&copy; 2024 Global Glimpse. All rights reserved.</p>
+    <!--~~~~~~~~~~ Auto Scroll to Top ~~~~~~~~~~-->
+
+    <button id="scrollToTopBtn" class="scroll-to-top">
+      <i class="bx bxs-chevrons-up"></i>
+    </button>
+
+    <!--~~~~~~~~~~ Footer Section ~~~~~~~~~~-->
+
+    <footer class="footer">
+      <div class="footer-container">
+        <!--? About Section ?-->
+        <div class="footer-section about">
+          <h3>About Global Glimpse</h3>
+          <p>
+            Global Glimpse is your one-stop destination for the latest news in
+            Business, Entertainment, Technology, Health, Sports, and Science.
+            Stay informed and connected with the world.
+          </p>
+          <br />
+          <h4>What Our Readers Say</h4>
+          <blockquote>
+            <i
+              >"Global Glimpse keeps me informed with the latest and most
+              reliable news."</i
+            >
+            <span>- Jane Doe</span>
+          </blockquote>
+        </div>
+
+        <!--? Quick Links Section ?-->
+        <div class="footer-section links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="topNews.html">Trending</a></li>
+            <li><a href="forYou.html">Local</a></li>
+            <li><a href="latestNews.html">Latest</a></li>
+            <li><a href="Business.html">Business</a></li>
+            <li><a href="Entertainment.html">Entertainment</a></li>
+            <li><a href="Technology.html">Technology</a></li>
+            <li><a href="Health.html">Health</a></li>
+            <li><a href="Sports.html">Sports</a></li>
+            <li><a href="Science.html">Science</a></li>
+          </ul>
+        </div>
+
+        <!--? Newsletter Subscription Section ?-->
+        <div class="footer-section newsletter">
+          <h3>Subscribe to Our Newsletter</h3>
+          <form id="newsletter-form">
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
+            <button type="submit">Subscribe</button>
+          </form>
+          <div id="newsletter-feedback" style="margin-top: 10px"></div>
+          <p>Stay updated with the latest news delivered to your inbox.</p>
+        </div>
+
+        <!--? Social Media Links Section ?-->
+        <div class="footer-section social">
+          <h3>Follow Us</h3>
+
+          <div class="social-links">
+            <a href="https://www.facebook.com" target="_blank"
+              ><i class="bx bxl-facebook"></i
+            ></a>
+            <a href="https://x.com" target="_blank"
+              ><i class="bx bxl-twitter"></i
+            ></a>
+            <a href="https://www.instagram.com" target="_blank"
+              ><i class="bx bxl-instagram"></i
+            ></a>
+            <a href="https://in.linkedin.com/" target="_blank"
+              ><i class="bx bxl-linkedin"></i
+            ></a>
+          </div>
+          <br />
+          <div class="social-connects">
+            <h3>Partner With Us</h3>
+
+            <p>
+              Interested in collaborating with Global Glimpse?
+              <a href="partnerships.html">Learn more</a>.
+            </p>
+            <br />
+            <h3>Contact Us</h3>
+
+            <p>
+              <b>Email:</b>
+              <a href="mailto:support@globalglimpse.com"
+                >support@globalglimpse.com</a
+              >
+            </p>
+
+            <p><b>Phone:</b> +91-855-547-8151</p>
+
+            <p>
+              <b>Address:</b> Jnananjyothinagar, Jnana Jyothi Nagar, Gnana
+              Bharathi, Bengaluru, Karnataka 560056
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Global Glimpse. All Rights Reserved.</p>
+      </div>
+
+      <div class="footer-legal">
+        <a href="privacyPolicy.html">Privacy Policy</a>
+        <span class="dot">•</span>
+        <a href="Terms&Conditions.html">Terms & Conditions</a>
+        <span class="dot">•</span>
+        <a href="Disclaimer.html">Disclaimer</a>
+      </div>
     </footer>
 
+    <!--~~~~~~~~~~ JavaScript Files ~~~~~~~~~~-->
     <script>
       const form = document.getElementById("partnership-form");
       const formMessage = document.getElementById("form-message");
@@ -91,6 +293,135 @@
           formMessage.style.color = "red";
         }
       });
+
+      //~========== DOM Elements ==========~//
+
+      const searchField = document.getElementById("search-field");
+      const searchButton = document.getElementById("search-button");
+      const body = document.querySelector("body");
+      const nav = document.querySelector("nav");
+      const modeToggle = document.querySelector(".dark-light");
+      const searchToggle = document.querySelector(".searchToggle");
+      const sidebarOpen = document.querySelector(".sidebarOpen");
+      const sidebarClose = document.querySelector(".sidebarClose");
+
+      //~========== Search Handle & Redirect ==========~//
+
+      //? Redirects with the search query in the URL
+
+      //? Search Function
+      function performSearch() {
+        const query = searchField.value.trim();
+        if (query) {
+          window.location.href = `searchResult.html?query=${encodeURIComponent(
+            query
+          )}`;
+        } else {
+          alert("Please enter a search query.");
+        }
+      }
+
+      //? Redirects with the search query in the URL (Button and Enter Key)
+      searchButton.addEventListener("click", performSearch);
+
+      searchField.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+          performSearch();
+        }
+      });
+
+      //? Search Toggle
+      searchToggle.addEventListener("click", () => {
+        searchToggle.classList.toggle("active");
+      });
+
+      //~========== Dark Mode  ==========?//
+
+      //? Stores the user preferences
+
+      let getMode = localStorage.getItem("mode");
+      if (getMode && getMode === "dark-mode") {
+        body.classList.add("dark-mode");
+      }
+
+      //? Toggle Between Dark & Light Mode
+
+      modeToggle.addEventListener("click", () => {
+        modeToggle.classList.toggle("active");
+        body.classList.toggle("dark-mode");
+
+        if (!body.classList.contains("dark-mode")) {
+          localStorage.setItem("mode", "light-mode");
+        } else {
+          localStorage.setItem("mode", "dark-mode");
+        }
+      });
+
+      //~========== SideBar Toggle for Smaller Devices ==========~//
+
+      sidebarOpen.addEventListener("click", () => {
+        nav.classList.add("active");
+      });
+
+      //? Tap anywhere to close the sidebar
+
+      body.addEventListener("click", (e) => {
+        let clickedElm = e.target;
+
+        if (
+          !clickedElm.classList.contains("sidebarOpen") &&
+          !clickedElm.classList.contains("category-nav")
+        ) {
+          nav.classList.remove("active");
+        }
+      });
+
+      //~========== Scroll to Top ==========~//
+
+      //? Show or hide the button based on scroll position
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 200) {
+          //? Show the button after scrolling down 200px
+          scrollToTopBtn.style.display = "flex";
+        } else {
+          scrollToTopBtn.style.display = "none";
+        }
+      });
+
+      //? Scroll smoothly to the top when the button is clicked
+      scrollToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+
+      //~========== Newsletter Subscribe ==========~//
+
+      document
+        .getElementById("newsletter-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault(); // Prevent form submission
+
+          const emailInput = this.email;
+          const feedback = document.getElementById("newsletter-feedback");
+          const emailValue = emailInput.value.trim();
+
+          if (emailValue === "") {
+            feedback.textContent = ""; // Clear feedback if input is empty
+            return;
+          }
+
+          if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+            feedback.textContent = "Thank you for subscribing!";
+            feedback.style.color = "green";
+            emailInput.value = ""; // Clear input
+          } else {
+            feedback.textContent = "Please enter a valid email address.";
+            feedback.style.color = "red";
+          }
+        });
     </script>
   </body>
 </html>

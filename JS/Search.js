@@ -86,6 +86,7 @@ function displayNewsQuery(articles) {
     blogCard.appendChild(img);
     blogCard.appendChild(title);
     blogCard.appendChild(description);
+    blogCard.setAttribute("data-url", article.url);
     blogCard.addEventListener("click", () => {
       window.open(article.url, "_blank");
     });

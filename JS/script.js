@@ -72,6 +72,7 @@ function displayTopNews(articles) {
     blogCard.appendChild(img);
     blogCard.appendChild(title);
     blogCard.appendChild(description);
+    blogCard.setAttribute("data-url", article.url);
     blogCard.addEventListener("click", () => {
       window.open(article.url, "_blank");
     });
@@ -102,7 +103,7 @@ async function fetchLocalNews() {
     const articles = await fetchLocalNews();
     displayLocalNews(articles);
   } catch (error) {
-    console.error("Error fetching top news:", error);
+    console.error("Error fetching Local news:", error);
   }
 })();
 
@@ -132,6 +133,7 @@ function displayLocalNews(articles) {
     blogCard.appendChild(img);
     blogCard.appendChild(title);
     blogCard.appendChild(description);
+    blogCard.setAttribute("data-url", article.url);
     blogCard.addEventListener("click", () => {
       window.open(article.url, "_blank");
     });
@@ -190,6 +192,7 @@ function displayLatestNews(articles) {
     blogCard.appendChild(img);
     blogCard.appendChild(title);
     blogCard.appendChild(description);
+    blogCard.setAttribute("data-url", article.url);
     blogCard.addEventListener("click", () => {
       window.open(article.url, "_blank");
     });
