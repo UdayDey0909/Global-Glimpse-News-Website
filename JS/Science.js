@@ -104,7 +104,7 @@ const observer = new IntersectionObserver(
 
       //? End of the results
 
-      if (articles.length > 0) {
+      if (articles && articles.length > 0) {
         displayScienceNews(articles);
       } else {
         if (endOfResultsMessage) {

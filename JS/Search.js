@@ -127,7 +127,7 @@ const observer = new IntersectionObserver(
 
       //? End of the results
 
-      if (articles.length > 0) {
+      if (articles && articles.length > 0) {
         displayNewsQuery(articles);
       } else {
         if (endOfResultsMessage) {

@@ -114,8 +114,7 @@ const observer = new IntersectionObserver(
       const articles = await fetchEntertainmentNews();
 
       //? End of the results
-
-      if (articles.length > 0) {
+      if (articles && articles.length > 0) {
         displayEntertainmentNews(articles);
       } else {
         if (endOfResultsMessage) {

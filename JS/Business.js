@@ -22,7 +22,7 @@ let isFetching = false;
 
 async function fetchBusinessNews() {
   try {
-    const apiUrl = `${BASE_URL}/everything?q=business&searchIn=title,description&page=${page}&pageSize=8&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=business&searchIn=title,description&page=${page}&pageSize=4&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
 
@@ -115,7 +115,7 @@ const observer = new IntersectionObserver(
 
       //? End of the results
 
-      if (articles.length > 0) {
+      if (articles && articles.length > 0) {
         displayBusinessNews(articles);
       } else {
         if (endOfResultsMessage) {
