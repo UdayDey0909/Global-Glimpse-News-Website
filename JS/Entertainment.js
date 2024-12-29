@@ -45,7 +45,6 @@ async function fetchEntertainmentNews() {
 
 function displayEntertainmentNews(articles) {
   articles.forEach((article) => {
-    // Consolidated checks for required properties
     if (
       !article.urlToImage ||
       !article.title ||

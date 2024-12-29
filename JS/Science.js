@@ -41,31 +41,42 @@ async function fetchScienceNews() {
   }
 }
 
-//? Remove Corrupt Cards
+//? Remove Corrupt Article
 
 function displayScienceNews(articles) {
   articles.forEach((article) => {
+    if (
+      !article.urlToImage ||
+      !article.title ||
+      !article.description ||
+      article.title === "[Removed]"
+    ) {
+      return;
+    }
+
+    //? Create Article elements
+
     const blogCard = document.createElement("div");
     blogCard.classList.add("blog-card");
 
     const img = document.createElement("img");
     img.src = article.urlToImage;
-    if (!article.urlToImage) return;
 
     const title = document.createElement("h2");
     title.textContent = article.title;
-    if (article.title === "[Removed]") return;
 
     const description = document.createElement("p");
     description.textContent = article.description;
-    if (!article.description) return;
 
-    //? Create Science News Cards
+    //? Adds the Article card
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
     blogCard.appendChild(description);
     blogCard.setAttribute("data-url", article.url);
+
+    //? Open the article in new tab
+
     blogCard.addEventListener("click", () => {
       window.open(article.url, "_blank");
     });

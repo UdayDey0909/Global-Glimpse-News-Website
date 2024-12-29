@@ -65,37 +65,52 @@ async function fetchNewsQuery(query) {
   }
 }
 
+//? Remove Corrupt Article
+
 function displayNewsQuery(articles) {
-  const scrollAnchor = document.querySelector("#scroll-anchor");
   articles.forEach((article) => {
+    if (
+      !article.urlToImage ||
+      !article.title ||
+      !article.description ||
+      article.title === "[Removed]"
+    ) {
+      return;
+    }
+
+    //? Create Article elements
+
     const blogCard = document.createElement("div");
     blogCard.classList.add("blog-card");
 
     const img = document.createElement("img");
     img.src = article.urlToImage;
-    if (!article.urlToImage) return; // Skip if no image
 
     const title = document.createElement("h2");
     title.textContent = article.title;
-    if (article.title === "[Removed]") return; // Skip invalid titles
 
     const description = document.createElement("p");
-    description.textContent = article.description || "Description unavailable";
-    if (!article.description) return; // Skip if no description
+    description.textContent = article.description;
+
+    //? Adds the Article card
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
     blogCard.appendChild(description);
     blogCard.setAttribute("data-url", article.url);
+
+    //? Open the article in new tab
+
     blogCard.addEventListener("click", () => {
       window.open(article.url, "_blank");
     });
 
-    // Check if scrollAnchor exists and is a child of searchResult
+    //? Check if scrollAnchor exists for infinite scrolling
+
     if (scrollAnchor && searchResult.contains(scrollAnchor)) {
       searchResult.insertBefore(blogCard, scrollAnchor);
     } else {
-      searchResult.appendChild(blogCard); // Fallback if scrollAnchor is not found
+      searchResult.appendChild(blogCard);
     }
   });
 }
