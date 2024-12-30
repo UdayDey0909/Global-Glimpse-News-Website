@@ -22,8 +22,9 @@ let isFetching = false;
 
 async function fetchBusinessNews() {
   try {
-    const apiUrl = `${BASE_URL}/everything?q=business&searchIn=title,description&page=${page}&pageSize=4&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=business&searchIn=title,description&page=${page}&pageSize=8&apikey=${apikey}`;
     const response = await fetch(apiUrl);
+
     const data = await response.json();
 
     //? Display total results dynamically
@@ -107,6 +108,7 @@ function displayBusinessNews(articles) {
 const observer = new IntersectionObserver(
   async (entries) => {
     const endOfResultsMessage = document.getElementById("end-of-results");
+
     if (entries[0].isIntersecting && !isFetching) {
       isFetching = true;
       page++;
@@ -129,8 +131,8 @@ const observer = new IntersectionObserver(
   },
   {
     root: null,
-    rootMargin: "100px",
-    threshold: 0.7,
+    rootMargin: "200px",
+    threshold: 0.5,
   }
 );
 
