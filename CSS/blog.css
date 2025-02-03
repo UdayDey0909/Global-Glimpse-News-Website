@@ -36,16 +36,16 @@
 }
 
 .blog-card:hover {
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.767);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   transform: scale(1.01);
   cursor: pointer;
 }
 
-/*! Add hover for dark mode */
-
-/* body.dark-mode .blog-card:hover {
-  box-shadow: 0px 6px 8px rgb(82, 81, 81);
-} */
+body.dark-mode .blog-card:hover {
+  box-shadow: rgba(110, 109, 109, 0.4) 0px 5px 15px;
+  transform: scale(1.01);
+  cursor: pointer;
+}
 
 /*? Article Cards: Image ?*/
 

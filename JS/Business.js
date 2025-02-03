@@ -24,7 +24,6 @@ async function fetchBusinessNews() {
   try {
     const apiUrl = `${BASE_URL}/everything?q=business&searchIn=title,description&page=${page}&pageSize=8&apikey=${apikey}`;
     const response = await fetch(apiUrl);
-
     const data = await response.json();
 
     //? Display total results dynamically
@@ -142,6 +141,29 @@ if (scrollAnchor) {
   observer.observe(scrollAnchor);
 }
 
+//~========== Scroll To Top ==========~//
+
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+//? Show or hide the button based on scroll position (down 200px)
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 200) {
+    scrollToTopBtn.style.display = "flex";
+  } else {
+    scrollToTopBtn.style.display = "none";
+  }
+});
+
+//? Smoothly scroll to the top when clicked
+
+scrollToTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});
+
 //~========== Search Handle & Redirect ==========~//
 
 //? Redirects with the search query in the URL
@@ -187,7 +209,7 @@ modeToggle.addEventListener("click", () => {
 
 //~========== SideBar Toggle for Smaller Devices ==========~//
 
-sidebarOpen.addEventListener("click", () => {
+/* sidebarOpen.addEventListener("click", () => {
   nav.classList.add("active");
 });
 
@@ -202,4 +224,4 @@ body.addEventListener("click", (e) => {
   ) {
     nav.classList.remove("active");
   }
-});
+}); */

@@ -22,7 +22,7 @@ let isFetching = false;
 
 async function fetchEntertainmentNews() {
   try {
-    const apiUrl = `${BASE_URL}/everything?q=entertainment&searchIn=title,description&page=${page}&pageSize=16&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=entertainment&searchIn=title,description&page=${page}&pageSize=8&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
 
@@ -138,20 +138,22 @@ if (scrollAnchor) {
   observer.observe(scrollAnchor);
 }
 
-// Select the scroll-to-top button
+//~========== Scroll To Top ==========~//
+
 const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
-// Show or hide the button based on scroll position
+//? Show or hide the button based on scroll position (down 200px)
+
 window.addEventListener("scroll", () => {
   if (window.scrollY > 200) {
-    // Show the button after scrolling down 200px
     scrollToTopBtn.style.display = "flex";
   } else {
     scrollToTopBtn.style.display = "none";
   }
 });
 
-// Scroll smoothly to the top when the button is clicked
+//? Smoothly scroll to the top when clicked
+
 scrollToTopBtn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
@@ -204,7 +206,7 @@ modeToggle.addEventListener("click", () => {
 
 //~========== SideBar Toggle for Smaller Devices ==========~//
 
-sidebarOpen.addEventListener("click", () => {
+/* sidebarOpen.addEventListener("click", () => {
   nav.classList.add("active");
 });
 
@@ -219,4 +221,4 @@ body.addEventListener("click", (e) => {
   ) {
     nav.classList.remove("active");
   }
-});
+}); */

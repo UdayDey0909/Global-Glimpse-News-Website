@@ -11,45 +11,53 @@ const modeToggle = document.querySelector(".dark-light");
 const searchToggle = document.querySelector(".searchToggle");
 const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
-
 const searchResult = document.getElementById("search-result");
 
-let page = 1; // Initialize page number for business news
-let isFetching = false; // Prevent multiple simultaneous fetches
-let currentQuery = ""; // Store the active search query
+let page = 1;
+let isFetching = false;
 
-//?======= Search Query =======?//
+//? Store the active search query
+let currentQuery = "";
 
-// Extract query from URL
+//~========== Search Query ==========~//
+
+//? Extract query from URL & stores in the active search query
+
 const urlParams = new URLSearchParams(window.location.search);
-const initialQuery = urlParams.get("query"); // Get 'query' parameter
-currentQuery = initialQuery || ""; // Initialize currentQuery
+const initialQuery = urlParams.get("query");
+currentQuery = initialQuery || "";
 
-// Automatically fetch and display results if a query is provided
+//~========== Redirects & Display Queries ==========~//
+
 if (initialQuery) {
   fetchAndDisplayResults(initialQuery);
 }
 
 async function fetchAndDisplayResults(query) {
-  page = 1; // Reset page for new query
+  page = 1; //? Reset page for new query
   try {
     const articles = await fetchNewsQuery(query);
-    searchResult.innerHTML = ""; // Clear previous results
+    searchResult.innerHTML = "";
     displayNewsQuery(articles);
   } catch (error) {
     console.error("Error fetching news by query", error);
   }
 }
 
+//~========== Fetch and Display Query News ==========~//
+
+//? API URL
+
 async function fetchNewsQuery(query) {
   try {
     const apiUrl = `${BASE_URL}/everything?q=${encodeURIComponent(
       query
-    )}&searchIn=title,description&language=en&pageSize=10&apikey=${apikey}`;
+    )}&searchIn=title,description&language=en&page=${page}&pageSize=8&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
 
-    // Ensure totalResults is a number
+    //? Display total results dynamically & Ensure its a Number
+
     const totalResults =
       typeof data.totalResults === "number" ? data.totalResults : 0;
 
@@ -115,13 +123,15 @@ function displayNewsQuery(articles) {
   });
 }
 
+//? Display search results for current page
+
 searchButton.addEventListener("click", async () => {
   const query = searchField.value.trim();
   if (query !== "") {
-    page = 1; // Reset page for new search query
+    page = 1;
     try {
       const articles = await fetchNewsQuery(query);
-      searchResult.innerHTML = ""; // Clear previous results
+      searchResult.innerHTML = "";
       displayNewsQuery(articles);
     } catch (error) {
       console.log("Error fetching news by query", error);
@@ -166,6 +176,29 @@ const observer = new IntersectionObserver(
 if (scrollAnchor) {
   observer.observe(scrollAnchor);
 }
+
+//~========== Scroll To Top ==========~//
+
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+//? Show or hide the button based on scroll position (down 200px)
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 200) {
+    scrollToTopBtn.style.display = "flex";
+  } else {
+    scrollToTopBtn.style.display = "none";
+  }
+});
+
+//? Smoothly scroll to the top when clicked
+
+scrollToTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});
 
 //~========== Search Handle & Redirect ==========~//
 
@@ -212,7 +245,7 @@ modeToggle.addEventListener("click", () => {
 
 //~========== SideBar Toggle for Smaller Devices ==========~//
 
-sidebarOpen.addEventListener("click", () => {
+/* sidebarOpen.addEventListener("click", () => {
   nav.classList.add("active");
 });
 
@@ -227,4 +260,4 @@ body.addEventListener("click", (e) => {
   ) {
     nav.classList.remove("active");
   }
-});
+}); */

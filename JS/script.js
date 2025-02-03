@@ -17,11 +17,10 @@ const modeToggle = document.querySelector(".dark-light");
 const searchToggle = document.querySelector(".searchToggle");
 const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
-const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
 //~========== Top News in India ==========~//
 
-//? API URL
+//? Loads Fixed Articles for Infinite Scroll
 
 async function fetchTopNews() {
   try {
@@ -92,7 +91,7 @@ function displayTopNews(articles) {
 
 //~========== Local News in Assam ==========~//
 
-//? API URL
+//? Loads Fixed Articles for Infinite Scroll
 
 async function fetchLocalNews() {
   try {
@@ -163,6 +162,8 @@ function displayLocalNews(articles) {
 
 //~========== Latest News in World ==========~//
 
+//? Loads Fixed Articles for Infinite Scroll
+
 async function fetchLatestNews() {
   try {
     const apiUrl = `${BASE_URL}/everything?q=Latest&searchIn=title&pageSize=20&apikey=${apikey}`;
@@ -230,7 +231,7 @@ function displayLatestNews(articles) {
   });
 }
 
-//~========== Hero Section Button Smooth Scrolling ==========~//
+//~========== Hero Section [Read Now] Button Smooth Scrolling ==========~//
 
 document
   .querySelector(".start-btn")
@@ -276,8 +277,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
-//! Call this function after data is dynamically populated
 
 //~========== Search Handle & Redirect ==========~//
 
@@ -350,20 +349,22 @@ body.addEventListener("click", (e) => {
   }
 });
 
-//~========== Scroll to Top ==========~//
+//~========== Scroll To Top ==========~//
 
-//? Show or hide the button based on scroll position
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+//? Show or hide the button based on scroll position (down 200px)
 
 window.addEventListener("scroll", () => {
   if (window.scrollY > 200) {
-    //? Show the button after scrolling down 200px
     scrollToTopBtn.style.display = "flex";
   } else {
     scrollToTopBtn.style.display = "none";
   }
 });
 
-//? Scroll smoothly to the top when the button is clicked
+//? Smoothly scroll to the top when clicked
+
 scrollToTopBtn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
@@ -373,24 +374,25 @@ scrollToTopBtn.addEventListener("click", () => {
 
 //~========== Newsletter Subscribe ==========~//
 
+//! Dummy Feature for no backend system
+
 document
   .getElementById("newsletter-form")
   .addEventListener("submit", function (e) {
-    e.preventDefault(); // Prevent form submission
-
+    e.preventDefault();
     const emailInput = this.email;
     const feedback = document.getElementById("newsletter-feedback");
     const emailValue = emailInput.value.trim();
 
     if (emailValue === "") {
-      feedback.textContent = ""; // Clear feedback if input is empty
+      feedback.textContent = "";
       return;
     }
 
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
       feedback.textContent = "Thank you for subscribing!";
       feedback.style.color = "green";
-      emailInput.value = ""; // Clear input
+      emailInput.value = "";
     } else {
       feedback.textContent = "Please enter a valid email address.";
       feedback.style.color = "red";
