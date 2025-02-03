@@ -332,7 +332,7 @@ modeToggle.addEventListener("click", () => {
 
 //~========== SideBar Toggle for Smaller Devices ==========~//
 
-sidebarOpen.addEventListener("click", () => {
+/* sidebarOpen.addEventListener("click", () => {
   nav.classList.add("active");
 });
 
@@ -347,7 +347,7 @@ body.addEventListener("click", (e) => {
   ) {
     nav.classList.remove("active");
   }
-});
+}); */
 
 //~========== Scroll To Top ==========~//
 

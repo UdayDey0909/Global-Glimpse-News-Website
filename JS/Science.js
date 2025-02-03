@@ -13,7 +13,7 @@ const searchToggle = document.querySelector(".searchToggle");
 const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
 
-//~========== Fetch and Display Science News ==========~//
+//~========== Fetch and Display Science News  ==========~//
 
 let page = 1;
 let isFetching = false;

@@ -207,7 +207,7 @@ modeToggle.addEventListener("click", () => {
   }
 });
 
-//~========== SideBar Toggle for Smaller Devices ==========~//
+//~========== SideBar Toggle for Smaller Devices  ==========~//
 
 /* sidebarOpen.addEventListener("click", () => {
   nav.classList.add("active");
