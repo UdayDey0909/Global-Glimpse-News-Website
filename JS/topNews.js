@@ -2,7 +2,7 @@ const { apikey, BASE_URL } = window.config;
 
 //~========== DOM Elements ==========~//
 
-const entertainmentNews = document.getElementById("entertainment-news");
+const topNews = document.getElementById("topNews");
 const searchField = document.getElementById("search-field");
 const searchButton = document.getElementById("search-button");
 const scrollAnchor = document.querySelector("#scroll-anchor");
@@ -13,16 +13,16 @@ const searchToggle = document.querySelector(".searchToggle");
 const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
 
-//~========== Fetch and Display Entertainment News ==========~//
+//~========== Fetch and Display top News ==========~//
 
 let page = 1;
 let isFetching = false;
 
 //? API URL
 
-async function fetchEntertainmentNews() {
+async function fetchTopNews() {
   try {
-    const apiUrl = `${BASE_URL}/everything?q=entertainment&searchIn=title,description&page=${page}&pageSize=8&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=India&searchIn=title&page=${page}&pageSize=8&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
 
@@ -31,19 +31,19 @@ async function fetchEntertainmentNews() {
     const totalResults = data.totalResults || 0;
     const totalResultsElement = document.getElementById("total-results");
     if (totalResultsElement) {
-      totalResultsElement.textContent = `Total Entertainment Articles: ${totalResults}`;
+      totalResultsElement.textContent = `Total Top News Articles: ${totalResults}`;
     }
 
     return data.articles;
   } catch (error) {
-    console.error("Error fetching Entertainment news", error);
+    console.error("Error fetching Top news", error);
     return [];
   }
 }
 
 //? Remove Corrupt Cards
 
-function displayEntertainmentNews(articles) {
+function displayTopNews(articles) {
   articles.forEach((article) => {
     const blogCard = document.createElement("div");
     blogCard.classList.add("blog-card");
@@ -60,7 +60,7 @@ function displayEntertainmentNews(articles) {
     description.textContent = article.description;
     if (!article.description) return;
 
-    //? Create Entertainment News Cards
+    //? Create Top News Cards
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
@@ -71,22 +71,22 @@ function displayEntertainmentNews(articles) {
 
     //? Check if scrollAnchor exists for infinite scrolling
 
-    if (scrollAnchor && entertainmentNews.contains(scrollAnchor)) {
-      entertainmentNews.insertBefore(blogCard, scrollAnchor);
+    if (scrollAnchor && topNews.contains(scrollAnchor)) {
+      topNews.insertBefore(blogCard, scrollAnchor);
     } else {
-      entertainmentNews.appendChild(blogCard);
+      topNews.appendChild(blogCard);
     }
   });
 }
 
-//? Fetch & Display Entertainment News Cards
+//? Fetch & Display Top News Cards
 
 (async () => {
   try {
-    const articles = await fetchEntertainmentNews();
-    displayEntertainmentNews(articles);
+    const articles = await fetchTopNews();
+    displayTopNews(articles);
   } catch (error) {
-    console.error("Error fetching Entertainment News:", error);
+    console.error("Error fetching Top News:", error);
   }
 })();
 
@@ -99,12 +99,12 @@ const observer = new IntersectionObserver(
       isFetching = true;
       page++;
 
-      const articles = await fetchEntertainmentNews();
+      const articles = await fetchTopNews();
 
       //? End of the results
 
       if (articles.length > 0) {
-        displayEntertainmentNews(articles);
+        displayTopNews(articles);
       } else {
         if (endOfResultsMessage) {
           endOfResultsMessage.style.display = "block";

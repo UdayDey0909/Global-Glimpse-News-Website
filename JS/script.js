@@ -5,7 +5,7 @@ const { apikey, BASE_URL } = window.config;
 const newsQuery = document.getElementById("search-result");
 const topNews = document.getElementById("top-news");
 const localNews = document.getElementById("local-news");
-const blogContainer = document.getElementById("blog-container");
+const latestNews = document.getElementById("latest-news");
 const searchField = document.getElementById("search-field");
 const searchButton = document.getElementById("search-button");
 
@@ -17,15 +17,15 @@ const modeToggle = document.querySelector(".dark-light");
 const searchToggle = document.querySelector(".searchToggle");
 const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
-/* const scrollContainers = document.querySelectorAll(".article-width"); */
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
-//~========== Top News ==========~//
+//~========== Top News in India ==========~//
 
 //? API URL
 
 async function fetchTopNews() {
   try {
-    const apiUrl = `${BASE_URL}/top-headlines?country=us&pageSize=20&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=India&searchIn=title&pageSize=20&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
@@ -79,7 +79,7 @@ function displayTopNews(articles) {
   });
 }
 
-//~========== Local News ==========~//
+//~========== Local News in Assam ==========~//
 
 //? API URL
 
@@ -139,35 +139,35 @@ function displayLocalNews(articles) {
   });
 }
 
-//~========== Random News in India ==========~//
+//~========== Latest News in World ==========~//
 
-async function fetchRandomNews() {
+async function fetchLatestNews() {
   try {
-    const apiUrl = `${BASE_URL}/everything?q=india&searchIn=title&pageSize=20&apikey=${apikey}`;
+    const apiUrl = `${BASE_URL}/everything?q=Latest&searchIn=title&pageSize=20&apikey=${apikey}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.articles;
   } catch (error) {
-    console.error("Error fetching random news", error);
+    console.error("Error fetching Latest news", error);
     return [];
   }
 }
 
-//? Fetch & Display Random India News Cards
+//? Fetch & Display Latest News Cards
 
 (async () => {
   try {
-    const articles = await fetchRandomNews();
-    displayBlogs(articles);
+    const articles = await fetchLatestNews();
+    displayLatestNews(articles);
   } catch (error) {
-    console.error("Error fetching random news:", error);
+    console.error("Error fetching Latest news:", error);
   }
 })();
 
 //? Remove Corrupt Cards
 
-function displayBlogs(articles) {
-  blogContainer.innerHTML = "";
+function displayLatestNews(articles) {
+  latestNews.innerHTML = "";
 
   articles.forEach((article) => {
     const blogCard = document.createElement("div");
@@ -185,7 +185,7 @@ function displayBlogs(articles) {
     description.textContent = article.description;
     if (!article.description) return;
 
-    //? Create Random India News Cards
+    //? Create Latest News Cards
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
@@ -193,25 +193,40 @@ function displayBlogs(articles) {
     blogCard.addEventListener("click", () => {
       window.open(article.url, "_blank");
     });
-    blogContainer.appendChild(blogCard);
+    latestNews.appendChild(blogCard);
   });
 }
 
-//~========== Horizontal Scroll ==========~//
+//~========== Hero Section Button Smooth Scrolling ==========~//
+
+document
+  .querySelector(".start-btn")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    document
+      .querySelector("#hero-section-ref")
+      .scrollIntoView({ behavior: "smooth" });
+  });
+
+//~========== Horizontal Scroll & Infinite Loop ==========~//
 
 document.addEventListener("DOMContentLoaded", () => {
   const scrollContainers = document.querySelectorAll(".article-width");
 
-  scrollContainers.forEach((container) => {
-    const scrollAmount = 300; // Adjust based on the width of your articles
+  //? Amount of Scroll
 
-    // Horizontal scrolling using mouse wheel
+  scrollContainers.forEach((container) => {
+    const scrollAmount = 200;
+
+    //? Horizontal Scrolling
+
     container.addEventListener("wheel", (evt) => {
       evt.preventDefault();
       container.scrollLeft += evt.deltaY;
     });
 
-    // Loop articles on scroll
+    //? Loop articles on scroll
+
     container.addEventListener("scroll", () => {
       if (
         container.scrollLeft + container.offsetWidth >=
@@ -229,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Call this function after data is dynamically populated
+//! Call this function after data is dynamically populated
 
 //~========== Search Handle & Redirect ==========~//
 
@@ -291,4 +306,25 @@ body.addEventListener("click", (e) => {
   ) {
     nav.classList.remove("active");
   }
+});
+
+//~========== SideBar Toggle for Smaller Devices ==========~//
+
+//? Show or hide the button based on scroll position
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 200) {
+    //? Show the button after scrolling down 200px
+    scrollToTopBtn.style.display = "flex";
+  } else {
+    scrollToTopBtn.style.display = "none";
+  }
+});
+
+//? Scroll smoothly to the top when the button is clicked
+scrollToTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 });
