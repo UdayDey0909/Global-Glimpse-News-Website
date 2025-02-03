@@ -41,30 +41,42 @@ async function fetchTopNews() {
   }
 }
 
-//? Remove Corrupt Cards
+//? Remove Corrupt Article
 
 function displayTopNews(articles) {
   articles.forEach((article) => {
+    if (
+      !article.urlToImage ||
+      !article.title ||
+      !article.description ||
+      article.title === "[Removed]"
+    ) {
+      return;
+    }
+
+    //? Create Article elements
+
     const blogCard = document.createElement("div");
     blogCard.classList.add("blog-card");
 
     const img = document.createElement("img");
     img.src = article.urlToImage;
-    if (!article.urlToImage) return;
 
     const title = document.createElement("h2");
     title.textContent = article.title;
-    if (article.title === "[Removed]") return;
 
     const description = document.createElement("p");
     description.textContent = article.description;
-    if (!article.description) return;
 
-    //? Create Top News Cards
+    //? Adds the Article card
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
     blogCard.appendChild(description);
+    blogCard.setAttribute("data-url", article.url);
+
+    //? Open the article in new tab
+
     blogCard.addEventListener("click", () => {
       window.open(article.url, "_blank");
     });
@@ -103,7 +115,7 @@ const observer = new IntersectionObserver(
 
       //? End of the results
 
-      if (articles.length > 0) {
+      if (articles && articles.length > 0) {
         displayTopNews(articles);
       } else {
         if (endOfResultsMessage) {
@@ -117,8 +129,8 @@ const observer = new IntersectionObserver(
   },
   {
     root: null,
-    rootMargin: "100px",
-    threshold: 0.7,
+    rootMargin: "200px",
+    threshold: 0.5,
   }
 );
 
@@ -128,20 +140,22 @@ if (scrollAnchor) {
   observer.observe(scrollAnchor);
 }
 
-// Select the scroll-to-top button
+//~========== Scroll To Top ==========~//
+
 const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
-// Show or hide the button based on scroll position
+//? Show or hide the button based on scroll position (down 200px)
+
 window.addEventListener("scroll", () => {
   if (window.scrollY > 200) {
-    // Show the button after scrolling down 200px
     scrollToTopBtn.style.display = "flex";
   } else {
     scrollToTopBtn.style.display = "none";
   }
 });
 
-// Scroll smoothly to the top when the button is clicked
+//? Smoothly scroll to the top when clicked
+
 scrollToTopBtn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
@@ -194,7 +208,7 @@ modeToggle.addEventListener("click", () => {
 
 //~========== SideBar Toggle for Smaller Devices ==========~//
 
-sidebarOpen.addEventListener("click", () => {
+/* sidebarOpen.addEventListener("click", () => {
   nav.classList.add("active");
 });
 
@@ -209,4 +223,4 @@ body.addEventListener("click", (e) => {
   ) {
     nav.classList.remove("active");
   }
-});
+}); */

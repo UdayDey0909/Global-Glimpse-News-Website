@@ -17,11 +17,10 @@ const modeToggle = document.querySelector(".dark-light");
 const searchToggle = document.querySelector(".searchToggle");
 const sidebarOpen = document.querySelector(".sidebarOpen");
 const sidebarClose = document.querySelector(".sidebarClose");
-const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
 //~========== Top News in India ==========~//
 
-//? API URL
+//? Loads Fixed Articles for Infinite Scroll
 
 async function fetchTopNews() {
   try {
@@ -46,32 +45,43 @@ async function fetchTopNews() {
   }
 })();
 
-//? Remove Corrupt Cards
+//? Remove Corrupt Article
 
 function displayTopNews(articles) {
   topNews.innerHTML = "";
-
   articles.forEach((article) => {
+    if (
+      !article.urlToImage ||
+      !article.title ||
+      !article.description ||
+      article.title === "[Removed]"
+    ) {
+      return;
+    }
+
+    //? Create Article elements
+
     const blogCard = document.createElement("div");
     blogCard.classList.add("blog-card");
 
     const img = document.createElement("img");
     img.src = article.urlToImage;
-    if (!article.urlToImage) return;
 
     const title = document.createElement("h2");
     title.textContent = article.title;
-    if (article.title === "[Removed]") return;
 
     const description = document.createElement("p");
     description.textContent = article.description;
-    if (!article.description) return;
 
-    //? Create Top News Cards
+    //? Adds the Article card
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
     blogCard.appendChild(description);
+    blogCard.setAttribute("data-url", article.url);
+
+    //? Open the article in new tab
+
     blogCard.addEventListener("click", () => {
       window.open(article.url, "_blank");
     });
@@ -81,7 +91,7 @@ function displayTopNews(articles) {
 
 //~========== Local News in Assam ==========~//
 
-//? API URL
+//? Loads Fixed Articles for Infinite Scroll
 
 async function fetchLocalNews() {
   try {
@@ -102,36 +112,47 @@ async function fetchLocalNews() {
     const articles = await fetchLocalNews();
     displayLocalNews(articles);
   } catch (error) {
-    console.error("Error fetching top news:", error);
+    console.error("Error fetching Local news:", error);
   }
 })();
 
-//? Remove Corrupt Cards
+//? Remove Corrupt Article
 
 function displayLocalNews(articles) {
   localNews.innerHTML = "";
-
   articles.forEach((article) => {
+    if (
+      !article.urlToImage ||
+      !article.title ||
+      !article.description ||
+      article.title === "[Removed]"
+    ) {
+      return;
+    }
+
+    //? Create Article elements
+
     const blogCard = document.createElement("div");
     blogCard.classList.add("blog-card");
 
     const img = document.createElement("img");
     img.src = article.urlToImage;
-    if (!article.urlToImage) return;
 
     const title = document.createElement("h2");
     title.textContent = article.title;
-    if (article.title === "[Removed]") return;
 
     const description = document.createElement("p");
     description.textContent = article.description;
-    if (!article.description) return;
 
-    //? Create Local News Cards
+    //? Adds the Article card
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
     blogCard.appendChild(description);
+    blogCard.setAttribute("data-url", article.url);
+
+    //? Open the article in new tab
+
     blogCard.addEventListener("click", () => {
       window.open(article.url, "_blank");
     });
@@ -140,6 +161,8 @@ function displayLocalNews(articles) {
 }
 
 //~========== Latest News in World ==========~//
+
+//? Loads Fixed Articles for Infinite Scroll
 
 async function fetchLatestNews() {
   try {
@@ -164,32 +187,43 @@ async function fetchLatestNews() {
   }
 })();
 
-//? Remove Corrupt Cards
+//? Remove Corrupt Article
 
 function displayLatestNews(articles) {
   latestNews.innerHTML = "";
-
   articles.forEach((article) => {
+    if (
+      !article.urlToImage ||
+      !article.title ||
+      !article.description ||
+      article.title === "[Removed]"
+    ) {
+      return;
+    }
+
+    //? Create Article elements
+
     const blogCard = document.createElement("div");
     blogCard.classList.add("blog-card");
 
     const img = document.createElement("img");
     img.src = article.urlToImage;
-    if (!article.urlToImage) return;
 
     const title = document.createElement("h2");
     title.textContent = article.title;
-    if (article.title === "[Removed]") return;
 
     const description = document.createElement("p");
     description.textContent = article.description;
-    if (!article.description) return;
 
-    //? Create Latest News Cards
+    //? Adds the Article card
 
     blogCard.appendChild(img);
     blogCard.appendChild(title);
     blogCard.appendChild(description);
+    blogCard.setAttribute("data-url", article.url);
+
+    //? Open the article in new tab
+
     blogCard.addEventListener("click", () => {
       window.open(article.url, "_blank");
     });
@@ -197,7 +231,7 @@ function displayLatestNews(articles) {
   });
 }
 
-//~========== Hero Section Button Smooth Scrolling ==========~//
+//~========== Hero Section [Read Now] Button Smooth Scrolling ==========~//
 
 document
   .querySelector(".start-btn")
@@ -244,25 +278,32 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-//! Call this function after data is dynamically populated
-
 //~========== Search Handle & Redirect ==========~//
 
 //? Redirects with the search query in the URL
 
-searchButton.addEventListener("click", () => {
+//? Search Function
+function performSearch() {
   const query = searchField.value.trim();
   if (query) {
     window.location.href = `searchResult.html?query=${encodeURIComponent(
       query
     )}`;
   } else {
-    console.warn("Search query is empty");
+    alert("Please enter a search query.");
+  }
+}
+
+//? Redirects with the search query in the URL (Button and Enter Key)
+searchButton.addEventListener("click", performSearch);
+
+searchField.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    performSearch();
   }
 });
 
-//?Search Button
-
+//? Search Toggle
 searchToggle.addEventListener("click", () => {
   searchToggle.classList.toggle("active");
 });
@@ -308,23 +349,52 @@ body.addEventListener("click", (e) => {
   }
 });
 
-//~========== SideBar Toggle for Smaller Devices ==========~//
+//~========== Scroll To Top ==========~//
 
-//? Show or hide the button based on scroll position
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+//? Show or hide the button based on scroll position (down 200px)
 
 window.addEventListener("scroll", () => {
   if (window.scrollY > 200) {
-    //? Show the button after scrolling down 200px
     scrollToTopBtn.style.display = "flex";
   } else {
     scrollToTopBtn.style.display = "none";
   }
 });
 
-//? Scroll smoothly to the top when the button is clicked
+//? Smoothly scroll to the top when clicked
+
 scrollToTopBtn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
     behavior: "smooth",
   });
 });
+
+//~========== Newsletter Subscribe ==========~//
+
+//! Dummy Feature for no backend system
+
+document
+  .getElementById("newsletter-form")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+    const emailInput = this.email;
+    const feedback = document.getElementById("newsletter-feedback");
+    const emailValue = emailInput.value.trim();
+
+    if (emailValue === "") {
+      feedback.textContent = "";
+      return;
+    }
+
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+      feedback.textContent = "Thank you for subscribing!";
+      feedback.style.color = "green";
+      emailInput.value = "";
+    } else {
+      feedback.textContent = "Please enter a valid email address.";
+      feedback.style.color = "red";
+    }
+  });
